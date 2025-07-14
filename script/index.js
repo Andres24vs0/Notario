@@ -1,4 +1,4 @@
-function cargarHTML(id, archivo) {
+async function cargarHTML(id, archivo) {
     fetch("pages/" + archivo + ".html")
         .then((response) => {
             if (!response.ok) {
@@ -14,14 +14,14 @@ function cargarHTML(id, archivo) {
         });
 }
 
-function cargarJS(archivo) {
-    const antiguo = document.getElementById("contenido-script");
+function cargarJS(id, archivo) {
+    const antiguo = document.getElementById(id + "-script");
     if (antiguo) {
         antiguo.remove();
     }
     const script = document.createElement("script");
     script.src = "script/" + archivo + ".js";
-    script.id = "contenido-script";
+    script.id = id + "-script";
     script.onload = () => {
         console.log(`Script ${archivo} cargado correctamente.`);
     };
@@ -31,15 +31,15 @@ function cargarJS(archivo) {
     document.head.appendChild(script);
 }
 
-function cargarCSS(archivo) {
-    const antiguo = document.getElementById("contenido-style");
+function cargarCSS(id, archivo) {
+    const antiguo = document.getElementById(id + "-style");
     if (antiguo) {
         antiguo.remove();
     }
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = "styles/" + archivo + ".css";
-    link.id = "contenido-style";
+    link.id = id + "-style";
     link.onload = () => {
         console.log(`Estilo ${archivo} cargado correctamente.`);
     };
@@ -49,14 +49,15 @@ function cargarCSS(archivo) {
     document.head.appendChild(link);
 }
 
-export default function cargarContenido(archivo) {
-    cargarHTML("contenido", archivo);
-    cargarJS(archivo);
-    cargarCSS(archivo);
+export default function cargarContenido(id, archivo) {
+    cargarHTML(id, archivo).then(() => {
+        cargarJS(id, archivo);
+        cargarCSS(id, archivo);
+    });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    cargarHTML("navbar", "navbar");
-    cargarContenido("notas");
-    cargarHTML("footer", "footer");
+    cargarContenido("navbar", "navbar");
+    cargarContenido("contenido", "notas");
+    cargarContenido("footer", "footer");
 });
