@@ -1,3 +1,10 @@
+export const codigosSimbolos =[
+    { codigo: "&#xf0c9;",descripcion:"menu"},
+    { codigo: "&#xf00d;",descripcion:"cancelar"},
+    { codigo: "&#xf060;",descripcion:"regresar"},
+]
+
+
 async function cargarHTML(id, archivo) {
     fetch("pages/" + archivo + ".html")
         .then((response) => {
@@ -22,6 +29,7 @@ function cargarJS(id, archivo) {
     const script = document.createElement("script");
     script.src = "script/" + archivo + ".js";
     script.id = id + "-script";
+    script.type = "module";
     script.onload = () => {
         console.log(`Script ${archivo} cargado correctamente.`);
     };
@@ -49,7 +57,7 @@ function cargarCSS(id, archivo) {
     document.head.appendChild(link);
 }
 
-export default function cargarContenido(id, archivo) {
+export function cargarContenido(id, archivo) {
     cargarHTML(id, archivo).then(() => {
         cargarJS(id, archivo);
         cargarCSS(id, archivo);
