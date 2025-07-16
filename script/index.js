@@ -1,12 +1,11 @@
-export const codigosSimbolos =[
-    { codigo: "&#xf0c9;",descripcion:"menu"},
-    { codigo: "&#xf00d;",descripcion:"cancelar"},
-    { codigo: "&#xf060;",descripcion:"regresar"},
-]
+export const codigosSimbolos = [
+    { codigo: "&#xf0c9;", descripcion: "menu" },
+    { codigo: "&#xf00d;", descripcion: "cancelar" },
+    { codigo: "&#xf060;", descripcion: "regresar" },
+];
 
-
-async function cargarHTML(id, archivo) {
-    fetch("pages/" + archivo + ".html")
+function cargarHTML(id, archivo) {
+    return fetch("pages/" + archivo + ".html")
         .then((response) => {
             if (!response.ok) {
                 throw new Error(
