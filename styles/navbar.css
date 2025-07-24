@@ -14,10 +14,10 @@
 #aside-navbar {
     display: none;
     position: fixed;
-    top: 12vw;
+    top: 15vw;
     left: 0;
     width: 100vw;
-    height: calc(100vh - 12vw);
+    height: calc(100vh - 15vw);
     background: var(--secondary-color);
     z-index: 1000;
     transition: color 1s ease;
@@ -63,7 +63,7 @@
 #menu-navbar {
     display: none;
     font-size: 5vw;
-    left: -35%;
+    left: -33%;
     position: relative;
 }
 

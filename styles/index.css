@@ -13,11 +13,18 @@ body{
     margin: 0;
     display: flex;
     flex-direction: column;
+    font-family: var(--font-family);
 }
 
 #navbar {
     height: 7vw;
-    overflow: auto;
+}
+
+#footer{
+    min-height: 7vw;
+    height: 7vw;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 #contenido {
@@ -25,7 +32,7 @@ body{
 }
 
 @media (max-width:560px){
-    #navbar{
-        height: 12vw;
+    #navbar, #footer{
+        height: 15vw;
     }
 }

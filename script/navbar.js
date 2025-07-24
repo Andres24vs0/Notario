@@ -1,4 +1,4 @@
-import { codigosSimbolos, cargarContenido } from "./index.js";
+import { obtenerSimbolos, cargarContenido } from "./index.js";
 
 const iconoMenu = document.getElementById("menu-navbar");
 const iconoAtras = document.getElementById("atras-aside");
@@ -8,15 +8,9 @@ const opcion3 = document.getElementsByClassName("opcion-3");
 const opcion4 = document.getElementsByClassName("opcion-4");
 const aside = document.getElementById("aside-navbar");
 let asideActivo = false;
-const codigoMenu = codigosSimbolos.find(
-    (item) => item.descripcion === "menu"
-).codigo;
-const codigoAtras = codigosSimbolos.find(
-    (item) => item.descripcion === "regresar"
-).codigo;
-const codigoCancelar = codigosSimbolos.find(
-    (item) => item.descripcion === "cancelar"
-).codigo;
+const codigoMenu = obtenerSimbolos("menu");
+const codigoAtras = obtenerSimbolos("regresar");
+const codigoCancelar = obtenerSimbolos("cancelar");
 
 opcion1[0].classList.add("active");
 

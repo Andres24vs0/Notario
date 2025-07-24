@@ -1,8 +1,17 @@
-export const codigosSimbolos = [
+const codigosSimbolos = [
     { codigo: "&#xf0c9;", descripcion: "menu" },
     { codigo: "&#xf00d;", descripcion: "cancelar" },
     { codigo: "&#xf060;", descripcion: "regresar" },
+    { codigo: "&#xf09b;", descripcion: "github" },
+    { codigo: "&#xf055;", descripcion: "añadir" },
+    { codigo: "&#xf1f8;", descripcion: "eliminar" },
+    { codigo: "&#xf16d;", descripcion: "instagram" },
 ];
+
+export function obtenerSimbolos(descripcion) {
+    return codigosSimbolos.find((item) => item.descripcion === descripcion)
+        .codigo;
+}
 
 function cargarHTML(id, archivo) {
     return fetch("pages/" + archivo + ".html")
