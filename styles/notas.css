@@ -1,0 +1,24 @@
+#zona-notas{
+    border: 10px solid var(--secondary-color);
+    border-radius: 10px;
+    padding: 1%;
+}
+
+.input-aclaracion{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1%;
+    gap: 3%;
+    height: fit-content;
+    align-items: center;
+}
+
+.aclaracion{
+    margin: 0px;
+    color: var(--hover-text-color);
+}
+
+#inputs-generales{
+    padding-bottom: 0.5%;
+    border-bottom: 0.2vw solid var(--primary-color);
+}
