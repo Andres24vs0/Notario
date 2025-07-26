@@ -1,1 +1,66 @@
-notas
+<section id="notas">
+  <h2>Nota Definitiva</h2>
+  <h5>Calcula tu nota final en una determinada materia</h5>
+  <form id="zona-notas">
+    <section id="inputs-generales">
+        <div class="label-input">
+            <label for="nota-maxima">Nota Máxima:</label>
+            <input type="number" id="nota-maxima" name="nota-maxima" placeholder="20" min="1" max="100" required>
+            <p class="aclaracion">* La nota máxima debe de ser la misma para la nota final que para las evaluaciones.</p>
+        </div>
+        <div class="label-input">
+            <label for="nota-minima">Nota Mínima:</label>
+            <input type="number" id="nota-minima" name="nota-minima" placeholder="9.5" min="0.5" max="100" step="0.5" required>
+            <p class="aclaracion">* La nota mínima representa la nota mínima necesaria para aprobar.</p>
+        </div>
+    </section>
+    <section id="inputs-notas">
+        <div class="evaluacion" id="evaluacion-1">
+            <h6>Evaluacion #1</h6>
+            <div class="label-input">
+                <label for="porcentaje-1">Porcentaje:</label>
+                <input type="number" id="porcentaje-1" name="porcentaje-1" class="porcentaje" placeholder="20" min="1" max="100" required>
+                <p class="porcentaje-texto">%</p>
+            </div>
+            <div class="label-input">
+                <label for="nota-1">Nota Conseguida:</label>
+                <input type="number" id="nota-1" name="nota-1" class="nota-conseguida" placeholder="15" min="1" max="100" required>
+            </div>
+            <i class="fa eliminar">&#xf1f8;</i>
+        </div>
+        
+        <div class="evaluacion" id="evaluacion-2">
+            <h6>Evaluacion #2</h6>
+            <div class="label-input">
+                <label for="porcentaje-2">Porcentaje:</label>
+                <input type="number" id="porcentaje-2" name="porcentaje-2" class="porcentaje" placeholder="20" min="1" max="100" required>
+                <p class="porcentaje-texto">%</p>
+            </div>
+            <div class="label-input">
+                <label for="nota-2">Nota Conseguida:</label>
+                <input type="number" id="nota-2" name="nota-2" class="nota-conseguida" placeholder="15" min="1" max="100" required>
+            </div>
+            <i class="fa eliminar">&#xf1f8;</i>
+        </div>
+        <div class="evaluacion" id="evaluacion-3">
+            <h6>Evaluacion #3</h6>
+            <div class="label-input">
+                <label for="porcentaje-3">Porcentaje:</label>
+                <input type="number" id="porcentaje-3" name="porcentaje-3" class="porcentaje" placeholder="20" min="1" max="100" required>
+                <p class="porcentaje-texto">%</p>
+            </div>
+            <div class="label-input">
+                <label for="nota-3">Nota Conseguida:</label>
+                <input type="number" id="nota-3" name="nota-3" class="nota-conseguida" placeholder="15" min="1" max="100" required>
+            </div>
+            <i class="fa eliminar">&#xf1f8;</i>
+        </div>
+    </section>
+    <i class="fa agregar">&#xf055;</i>
+    <input type="button" value="Calcular" id="calcular-nota">
+    <div id="resultado-nota">
+        <h3 id="nota-final">Tu nota es 15.8 que redondeado sería 16</h3>
+        <h3 class="texto-Aprobado">HAS APROBADO</h3>
+    </div>
+  </form>
+</section>
