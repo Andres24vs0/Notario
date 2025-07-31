@@ -40,6 +40,7 @@ h5{
 
 label{
     font-size: 1.68vw;
+    grid-column: 1;
 }
 
 input[type="number"] {
@@ -48,6 +49,7 @@ input[type="number"] {
     padding-left: 1vw;
     border: 5px solid var(--secondary-color);
     border-radius: 5px;
+    grid-column: 2;
 }
 input[type="number"]:focus {
   border-color: var(--primary-color);
@@ -61,6 +63,11 @@ input[type="number"]::placeholder {
 
 input[type="number"].invalido{
     color: var(--error-color);
+}
+
+.label-input input[type="number"] {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 input[type="button"]{
@@ -112,5 +119,9 @@ input[type="button"]:hover{
 @media (max-width:560px){
     #navbar, #footer{
         height: 15vw;
+    }
+
+    body{
+        font-size: 4vw;
     }
 }
