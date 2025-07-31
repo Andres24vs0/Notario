@@ -145,6 +145,7 @@ b{
 @media (max-width:560px){
     #zona-notas{
         border: 5px solid var(--secondary-color);
+        padding: 2%;
     }
 
     .aclaracion{
@@ -177,5 +178,16 @@ b{
 
     h3{
         font-size: 7vw;
+    }
+
+    #inputs-generales{
+        padding-bottom: 1.5%;
+        border-bottom: 0.75vw solid var(--primary-color);
+    }
+
+    .evaluacion{
+        padding-top: 1.5%;
+        padding-bottom: 1.5%;
+        border-bottom: 0.75vw solid var(--primary-color);
     }
 }
