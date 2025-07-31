@@ -65,6 +65,7 @@ h6{
     color: var(--secondary-color);
     grid-column: 1/3;
     margin: 0px;
+    align-items: center;
 }
 
 .evaluacion{
@@ -82,7 +83,7 @@ h6{
 }
 
 .input-porcentaje > .label-input{
-    width: 100%;
+    width: calc(100% - 2.5vw);
 }
 
 .porcentaje-texto{
@@ -100,7 +101,7 @@ h6{
 }
 
 #agregar{
-    font-size: 3vw;
+    font-size: 3.5vw;
     color: var(--secondary-color);
     cursor: pointer;
 }
@@ -117,6 +118,7 @@ h6{
     width: 100%;
     margin-top: 2%;
     margin-bottom: 2%;
+    text-align: center;
 }
 
 h3{
@@ -138,4 +140,42 @@ b{
 
 .texto-reprobado{
     color: var(--error-color);
+}
+
+@media (max-width:560px){
+    #zona-notas{
+        border: 5px solid var(--secondary-color);
+    }
+
+    .aclaracion{
+        width: 54%;
+    }
+    
+    .input-porcentaje{
+        width: calc(40% + 4vw);
+    }
+    .porcentaje-texto{
+        margin-left: 1vw;
+        width: 3vw;
+    }
+    .input-porcentaje > .label-input{
+        width: calc(100% - 4vw + 3%);
+    }
+
+    h6{
+        font-size: 3.5vw;
+        grid-column: 1/5;
+    }
+
+    .eliminar{
+        font-size: 5.5vw;
+    }
+
+    #agregar{
+        font-size: 5.5vw;
+    }
+
+    h3{
+        font-size: 7vw;
+    }
 }
