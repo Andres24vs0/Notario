@@ -8,6 +8,7 @@
     --placeholder-color:#b2b1ba;
     --shadow-color: #f7f571ca; 
     --error-color: #f42b2b;
+    --error-shadow-color: #af0c0cda;
     --font-family: 'Istok Web', Arial, sans-serif; 
 }
 
@@ -59,6 +60,12 @@ input[type="number"]::placeholder {
 
 input[type="number"].invalido{
     color: var(--error-color);
+    border-color: var(--error-color);
+}
+input[type="number"].invalido:focus{
+    border-color: var(--error-color);
+    box-shadow: 0 0 0 2px var(--error-shadow-color);
+    outline: none;
 }
 
 .label-input input[type="number"] {
