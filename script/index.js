@@ -3,7 +3,7 @@ const codigosSimbolos = [
     { codigo: "&#xf00d;", descripcion: "cancelar" },
     { codigo: "&#xf060;", descripcion: "regresar" },
     { codigo: "&#xf09b;", descripcion: "github" },
-    { codigo: "&#xf055;", descripcion: "añadir" },
+    { codigo: "&#xf055;", descripcion: "agregar" },
     { codigo: "&#xf1f8;", descripcion: "eliminar" },
     { codigo: "&#xf16d;", descripcion: "instagram" },
 ];
