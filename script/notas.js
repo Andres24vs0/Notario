@@ -2,8 +2,6 @@ import { obtenerSimbolos } from "./index.js";
 
 let cantEvaluacion = 0;
 
-const formulario = document.getElementById("zona-notas");
-
 const inputNotaMaxima = document.getElementById("nota-maxima");
 const inputNotaMinima = document.getElementById("nota-minima");
 let notaMaxima;
@@ -43,9 +41,15 @@ for (let i = 1; i < 4; i++) {
 }
 
 const botonCalcular = document.getElementById("calcular-nota");
+const resultado = document.getElementById("resultado-nota");
+
 botonCalcular.addEventListener("click", () => {
+    resultado.innerHTML="";
     const esValido = formularioValido();
     console.log(esValido);
+    if (esValido) {
+        calcularNotaFinal();
+    }
 });
 
 function crearEstructuraEvaluacion(numero) {
@@ -70,6 +74,32 @@ function crearEstructuraEvaluacion(numero) {
             </div>
         </div>`;
     return evaluacion;
+}
+
+function crearEstructuraResultado(
+    notaFinal,
+    notaRedondeada,
+    aprobadoFinal,
+    aprobadoRedondeado
+) {
+    let resultado;
+    if (notaRedondeada === null) {
+        resultado = `<h3 id="nota-final">Tu nota es <b>${notaFinal}</b></h3>`;
+    } else {
+        resultado = `<h3 id="nota-final">Tu nota es <b>${notaFinal}</b> que redondeado sería <b>${notaRedondeada}</b></h3>`;
+    }
+    if (aprobadoFinal && aprobadoRedondeado) {
+        resultado += `<h3 class="texto-aprobado">HAS APROBADO</h3>`;
+    } else if (!aprobadoFinal && !aprobadoRedondeado) {
+        resultado += `<h3 class="texto-reprobado">HAS REPROBADO</h3>`;
+    } else if (!aprobadoFinal && aprobadoRedondeado) {
+        resultado += `<h3 class="texto-aprobado">SI LA NOTA SE REDONDEA HAS APROBADO</h3>
+        <h3 class="texto-reprobado">SI LA NOTA NO SE REDONDEA HAS REPROBADO</h3>`;
+    } else if (aprobadoFinal && !aprobadoRedondeado) {
+        resultado += `<h3 class="texto-aprobado">SI LA NOTA NO SE REDONDEA HAS APROBADO</h3>
+        <h3 class="texto-reprobado">SI LA NOTA SE REDONDEA HAS REPROBADO</h3>`;
+    }
+    return resultado;
 }
 
 function agregarEvaluacion() {
@@ -230,4 +260,32 @@ function formularioValido() {
         esValido = false;
     }
     return esValido;
+}
+
+function calcularNotaFinal() {
+    const porcentajes = document.querySelectorAll(".porcentaje");
+    const notas = document.querySelectorAll(".nota-conseguida");
+    let notaFinal = 0;
+    for (let i = 0; i < cantEvaluacion; i++) {
+        const porcentaje = parseFloat(porcentajes[i].value);
+        const nota = parseFloat(notas[i].value);
+        if (!isNaN(porcentaje) && !isNaN(nota)) {
+            notaFinal += (porcentaje / 100) * nota;
+        }
+    }
+    notaFinal = parseFloat(notaFinal.toFixed(2));
+    let notaRedondeada = Math.round(notaFinal);
+    const aprobadoFinal = notaFinal >= parseFloat(notaMinima);
+    const aprobadoRedondeado = notaRedondeada >= parseFloat(notaMinima);
+
+    if (notaFinal === notaRedondeada) {
+        notaRedondeada = null;
+    }
+
+    resultado.innerHTML = crearEstructuraResultado(
+        notaFinal,
+        notaRedondeada,
+        aprobadoFinal,
+        aprobadoRedondeado
+    );
 }
