@@ -13,6 +13,20 @@
     align-items: center;
 }
 
+.inputs-notas{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputs-evaluacion{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    width: 100%;
+    gap: 10vw;
+}
+
 .aclaracion{
     margin: 0px;
     color: var(--hover-text-color);
@@ -20,5 +34,108 @@
 
 #inputs-generales{
     padding-bottom: 0.5%;
-    border-bottom: 0.2vw solid var(--primary-color);
+    border-bottom: 0.25vw solid var(--primary-color);
+}
+
+.titulo-evaluacion{
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+}
+
+.eliminar{
+    color: var(--secondary-color);
+    grid-column: 10;
+    text-align: right;
+    font-size: 2.68vw;
+    cursor: pointer;
+    width: fit-content;
+    justify-self: right
+}
+
+.eliminar:hover{
+    color: var(--hover-text-color);
+}
+
+h6{
+    font-size: 1.68vw;
+    font-weight: normal;
+    color: var(--secondary-color);
+    grid-column: 1/3;
+    margin: 0px;
+}
+
+.evaluacion{
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    border-bottom: 0.25vw solid var(--primary-color);
+}
+
+.input-porcentaje{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 1;
+    width: calc(25% + 2.5vw);
+}
+
+.input-porcentaje > .label-input{
+    width: 100%;
+}
+
+.porcentaje-texto{
+    margin-left: 0.5vw;
+    width: 2vw;
+}
+
+#botones-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+    margin-top: 2%;
+}
+
+#agregar{
+    font-size: 3vw;
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+#agregar:hover{
+    color: var(--hover-text-color);
+}
+
+#resultado-nota{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+h3{
+    margin: 0px;
+    font-size: 2.78vw;
+}
+
+#nota-final{
+    font-weight: normal;
+}
+
+b{
+    color: var(--secondary-color);
+}
+
+.texto-aprobado{
+    color: var(--secondary-color);
+}
+
+.texto-reprobado{
+    color: var(--error-color);
 }

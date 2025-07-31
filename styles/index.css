@@ -3,8 +3,8 @@
     --secondary-color: #FF914D; 
     --text-color: #ffffff; 
     --hover-text-color:#ffaa76;
-    --hover-text-button-color:#e7e7e7; 
-    --hover-button-color:#d87a40;
+    --hover-text-button-color:#ffffff; 
+    --hover-button-color:#ffaa76;
     --placeholder-color:#b2b1ba;
     --shadow-color: #f7f571ca; 
     --error-color: #f42b2b;
@@ -18,6 +18,7 @@ body{
     flex-direction: column;
     font-family: var(--font-family);
     font-size: 1.68vw;
+    cursor: default;
 }
 
 h2{
@@ -60,6 +61,24 @@ input[type="number"]::placeholder {
 
 input[type="number"].invalido{
     color: var(--error-color);
+}
+
+input[type="button"]{
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    font-weight: bold;
+    border: none;
+    padding: 1vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.68vw;
+}
+
+input[type="button"]:hover{
+    background-color: var(--hover-button-color);
+    color: var(--hover-text-button-color);
 }
 
 .label-input{

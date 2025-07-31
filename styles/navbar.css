@@ -51,6 +51,11 @@
 }
 
 .opcion-aside.opcion-5{
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.opcion-aside.opcion-5{
     border-bottom: 0px;
 }
 
