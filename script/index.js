@@ -69,6 +69,22 @@ export function cargarContenido(id, archivo) {
     cargarHTML(id, archivo).then(() => {
         cargarJS(id, archivo);
         cargarCSS(id, archivo);
+        setTimeout(() => {
+            if (
+                window[
+                    "inicializar" +
+                        archivo.charAt(0).toUpperCase() +
+                        archivo.slice(1)
+                ]
+            ) {
+                window[
+                    "inicializar" +
+                        archivo.charAt(0).toUpperCase() +
+                        archivo.slice(1)
+                ]();
+                console.log(`Inicialización de ${archivo} completada.`);
+            }
+        }, 50);
     });
 }
 

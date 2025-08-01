@@ -1,56 +1,79 @@
 import { obtenerSimbolos } from "./index.js";
 
-let cantEvaluacion = 0;
+let zonaNotas;
 
-const inputNotaMaxima = document.getElementById("nota-maxima");
-const inputNotaMinima = document.getElementById("nota-minima");
+//Nota máxima y mínima
+let inputNotaMaxima;
+let inputNotaMinima;
 let notaMaxima;
 let notaMinima;
-let notaMaximaVacia = true;
+let notaMaximaVacia;
 
-inputNotaMaxima.addEventListener("input", (event) => {
-    if (!logicaErroresGenerico(event.target)) {
-        notaMaximaVacia = true;
-    } else {
-        notaMaximaVacia = false;
-        notaMaxima = event.target.value;
-        console.log("Nota Maxima: " + notaMaxima);
+//Agregar y eliminar
+let cantEvaluacion;
+let simboloAgregar;
+let simboloEliminar;
+let botonAgregar;
+
+//Calcular
+let botonCalcular;
+let resultado;
+
+function inicializarNotas() {
+    zonaNotas = document.getElementById("inputs-notas");
+
+    //Inicializar nota máxima y mínima
+    inputNotaMaxima = document.getElementById("nota-maxima");
+    inputNotaMinima = document.getElementById("nota-minima");
+    notaMaximaVacia = true;
+
+    inputNotaMaxima.addEventListener("input", (event) => {
+        if (!logicaErroresGenerico(event.target)) {
+            notaMaximaVacia = true;
+        } else {
+            notaMaximaVacia = false;
+            notaMaxima = event.target.value;
+            console.log("Nota Maxima: " + notaMaxima);
+        }
+    });
+
+    inputNotaMinima.addEventListener("input", (event) => {
+        if (logicaErroresNotas(event.target)) {
+            notaMinima = event.target.value;
+            console.log("Nota Minima: " + notaMinima);
+        }
+    });
+
+    //Inicializar agregar y eliminar
+    cantEvaluacion = 0;
+    simboloAgregar = obtenerSimbolos("agregar");
+    simboloEliminar = obtenerSimbolos("eliminar");
+    botonAgregar = document.getElementById("agregar");
+    botonAgregar.innerHTML = simboloAgregar;
+
+    botonAgregar.addEventListener("click", () => {
+        logicaAgregar();
+    });
+
+    for (let i = 1; i < 4; i++) {
+        agregarEvaluacion();
     }
-});
 
-inputNotaMinima.addEventListener("input", (event) => {
-    if (logicaErroresNotas(event.target)) {
-        notaMinima = event.target.value;
-        console.log("Nota Minima: " + notaMinima);
-    }
-});
+    //Inicializar Calcular
+    botonCalcular = document.getElementById("calcular-nota");
+    resultado = document.getElementById("resultado-nota");
 
-const zonaNotas = document.getElementById("inputs-notas");
-
-const simboloAgregar = obtenerSimbolos("agregar");
-const simboloEliminar = obtenerSimbolos("eliminar");
-const botonAgregar = document.getElementById("agregar");
-
-botonAgregar.innerHTML = simboloAgregar;
-botonAgregar.addEventListener("click", () => {
-    logicaAgregar();
-});
-
-for (let i = 1; i < 4; i++) {
-    agregarEvaluacion();
+    botonCalcular.addEventListener("click", () => {
+        resultado.innerHTML = "";
+        const esValido = formularioValido();
+        console.log(esValido);
+        if (esValido) {
+            calcularNotaFinal();
+        }
+    });
 }
+window.inicializarNotas = inicializarNotas;
 
-const botonCalcular = document.getElementById("calcular-nota");
-const resultado = document.getElementById("resultado-nota");
-
-botonCalcular.addEventListener("click", () => {
-    resultado.innerHTML="";
-    const esValido = formularioValido();
-    console.log(esValido);
-    if (esValido) {
-        calcularNotaFinal();
-    }
-});
 
 function crearEstructuraEvaluacion(numero) {
     let evaluacion = `<div class="evaluacion" id="evaluacion-${numero}">
