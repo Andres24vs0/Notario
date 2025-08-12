@@ -211,7 +211,36 @@ h6{
     color: var(--hover-text-color);
 }
 
-@media (max-width:560px){
+select{
+    font-size: 1.68vw;
+    padding: 0.75vw;
+    padding-left: 1vw;
+    border: 5px solid var(--secondary-color);
+    border-radius: 5px;
+    grid-column: 2;
+}
+
+select:focus{
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--shadow-color);
+    outline: none;
+}
+
+.label-select{
+    display: grid;
+    grid-template-columns: calc(70% - 0.25vw) calc(30% - 0.25vw);
+    width: 62%;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    gap: 0.5vw;
+}
+
+b{
+    color: var(--secondary-color);
+}
+
+@media (max-width:600px){
     #contenido {
         min-height: 0;
     }

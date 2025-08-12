@@ -90,7 +90,7 @@
     color: var(--secondary-color);
 }
 
-@media (max-width:560px){
+@media (max-width:600px){
     #opciones-navbar {
         display: none;
     }

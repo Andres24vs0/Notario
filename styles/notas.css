@@ -40,10 +40,6 @@ h3{
     font-weight: normal;
 }
 
-b{
-    color: var(--secondary-color);
-}
-
 .texto-aprobado{
     color: var(--secondary-color);
 }
@@ -52,7 +48,7 @@ b{
     color: var(--error-color);
 }
 
-@media (max-width:560px){
+@media (max-width:600px){
     #zona-notas{
         border: 5px solid var(--secondary-color);
         padding: 2%;
