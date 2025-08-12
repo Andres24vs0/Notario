@@ -1,1 +1,216 @@
-prediccion
+<section id="prediccion">
+  <h2>Predicción de Notas</h2>
+  <h5>Calcula cuanto es la nota mínima que debes sacar en 1 o 2 evaluaciones para aprobar la materia</h5>
+  <form id="zona-prediccion">
+    <section id="parte-superior">
+        <section id="inputs-generales">
+            <div class="input-aclaracion">
+                <div class="label-input">
+                    <label for="nota-maxima">Nota Máxima:</label>
+                    <input type="number" id="nota-maxima" name="nota-maxima" placeholder="20" min="1" max="100" required>
+                </div>
+                <p class="aclaracion">* La nota máxima debe de ser la misma para la nota final que para las evaluaciones.</p>
+            </div>
+            
+            <div class="input-aclaracion">
+                <div class="label-input">
+                    <label for="nota-minima">Nota Mínima:</label>
+                    <input type="number" id="nota-minima" name="nota-minima" placeholder="10" min="0.5" max="100" step="0.5" required>
+                </div>
+                <p class="aclaracion">* La nota mínima representa la nota mínima necesaria para aprobar.</p>
+            </div>
+            
+        </section>
+        <section id="inputs-evaluaciones">
+            <section id="inputs-realizadas" class="inputs-evaluaciones">
+                <div class="titulo-superior">
+                    <h2>Evaluaciones Realizadas</h2>
+                    <h5 class="subtitulo">Aquí coloca las evaluaciones de las que ya conoces calificación</h5>
+                </div>
+                <div class="evaluacion" id="evaluacion-1">
+                    <div class="titulo-evaluacion">
+                        <h6>Evaluacion #1</h6>
+                        <i class="fa eliminar" id="eliminar-1">&#xf1f8;</i>
+                    </div>
+                    <div class="inputs-evaluacion">
+                        <div class="input-porcentaje">
+                            <div class="label-input">
+                                <label for="porcentaje-1">Porcentaje:</label>
+                                <input type="number" id="porcentaje-1" name="porcentaje-1" class="porcentaje" placeholder="20" min="1" max="99" required>
+                            </div>
+                            <p class="porcentaje-texto">%</p>
+                        </div>
+                        
+                        <div class="label-input">
+                            <label for="nota-1">Nota Conseguida:</label>
+                            <input type="number" id="nota-1" name="nota-1" class="nota-conseguida" placeholder="15" min="1" max="100" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="evaluacion" id="evaluacion-2">
+                    <div class="titulo-evaluacion">
+                        <h6>Evaluacion #2</h6>
+                        <i class="fa eliminar" id="eliminar-2">&#xf1f8;</i>
+                    </div>
+                    <div class="inputs-evaluacion">
+                        <div class="input-porcentaje">
+                            <div class="label-input">
+                                <label for="porcentaje-2">Porcentaje:</label>
+                                <input type="number" id="porcentaje-2" name="porcentaje-2" class="porcentaje" placeholder="20" min="1" max="99" required>
+                            </div>
+                            <p class="porcentaje-texto">%</p>
+                        </div>
+                        
+                        <div class="label-input">
+                            <label for="nota-2">Nota Conseguida:</label>
+                            <input type="number" id="nota-2" name="nota-2" class="nota-conseguida" placeholder="15" min="1" max="100" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="evaluacion" id="evaluacion-3">
+                    <div class="titulo-evaluacion">
+                        <h6>Evaluacion #3</h6>
+                        <i class="fa eliminar" id="eliminar-3">&#xf1f8;</i>
+                    </div>
+                    <div class="inputs-evaluacion">
+                        <div class="input-porcentaje">
+                            <div class="label-input">
+                                <label for="porcentaje-3">Porcentaje:</label>
+                                <input type="number" id="porcentaje-3" name="porcentaje-3" class="porcentaje" placeholder="20" min="1" max="99" required>
+                            </div>
+                            <p class="porcentaje-texto">%</p>
+                        </div>
+                        
+                        <div class="label-input">
+                            <label for="nota-3">Nota Conseguida:</label>
+                            <input type="number" id="nota-3" name="nota-3" class="nota-conseguida" placeholder="15" min="1" max="100" required>
+                        </div>
+                    </div>
+                </div>
+                <i class="fa" id="agregar">&#xf055;</i>
+            </section>
+
+            <div id="divisor"></div>
+
+            <section id="inputs-futuras" class="inputs-evaluaciones">
+                <div class="titulo-superior">
+                    <h2>Evaluaciones Futuras</h2>
+                    <h5 class="subtitulo">Aquí coloca la o las evaluaciones de las cuales quieres saber cual es la calificación mínima que necesitas para aprobar</h5>
+                </div>
+                <div class="label-input">
+                    <label for="numero-evaluaciones">Número de evaluaciones:</label>
+                    <select name="numero-evaluaciones" id="numero-evaluaciones">
+                        <option value="1">1</option>
+                        <option value="2" selected>2</option>
+                    </select>
+                </div>
+                
+                <div class="evaluacion-futura" id="evaluacion-futura-1">
+                    <div class="titulo-evaluacion">
+                        <h6>Evaluacion Futura #1</h6>
+                    </div>
+                    <div class="inputs-futuro">
+                        <div class="input-porcentaje">
+                            <div class="label-input">
+                                <label for="porcentaje-futuro-1">Porcentaje:</label>
+                                <input type="number" id="porcentaje-futuro-1" name="porcentaje-futuro-1" class="porcentaje-futuro" placeholder="20" min="1" max="99" required>
+                            </div>
+                            <p class="porcentaje-texto">%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="evaluacion-futura" id="evaluacion-futura-2">
+                    <div class="titulo-evaluacion">
+                        <h6>Evaluacion Futura #2</h6>
+                    </div>
+                    <div class="inputs-futuro">
+                        <div class="input-porcentaje">
+                            <div class="label-input">
+                                <label for="porcentaje-futuro-2">Porcentaje:</label>
+                                <input type="number" id="porcentaje-futuro-2" name="porcentaje-futuro-2" class="porcentaje-futuro" placeholder="20" min="1" max="99" required>
+                            </div>
+                            <p class="porcentaje-texto">%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="button" value="Calcular" id="calcular-nota">
+            </section>
+
+        </section>  
+    </section>
+    <section id="parte-inferior">
+        <h2 class="titulo-resultado">Resultados</h2>
+        <div id="resultado-prediccion">
+
+            <div class="resultado" id="resultado-1">
+                <div class="titulo-resultado">
+                    <h3>Menor posible nota en<br>Evaluación Futura #1</h3>
+                </div>
+                <div class="evaluacion-resultado">
+                    <div class="titulo-evaluacion-resultado">
+                        <h6>Evaluación Futura #1</h6>
+                        <p>35%</p>
+                    </div>
+                    <h3 class="nota-necesaria">La nota necesaria es 11</h3>
+                </div>
+                <div class="evaluacion-resultado">
+                    <div class="titulo-evaluacion-resultado">
+                        <h6>Evaluación Futura #2</h6>
+                        <p>5%</p>
+                    </div>
+                    <h3 class="nota-necesaria">La nota necesaria es 19</h3>
+                </div>
+            </div>
+
+            <div class="divisor pequeño"></div>
+
+            <div class="resultado" id="resultado-2">
+                <div class="titulo-resultado">
+                    <h3>Notas medias en<br>ambas evaluaciones</h3>
+                </div>
+                <div class="evaluacion-resultado">
+                    <div class="titulo-evaluacion-resultado">
+                        <h6>Evaluación Futura #1</h6>
+                        <p>35%</p>
+                    </div>
+                    <h3 class="nota-necesaria">La nota necesaria es 11</h3>
+                </div>
+                <div class="evaluacion-resultado">
+                    <div class="titulo-evaluacion-resultado">
+                        <h6>Evaluación Futura #2</h6>
+                        <p>5%</p>
+                    </div>
+                    <h3 class="nota-necesaria">La nota necesaria es 19</h3>
+                </div>
+            </div>
+
+            <div class="divisor pequeño"></div>
+
+            <div class="resultado" id="resultado-1">
+                <div class="titulo-resultado">
+                    <h3>Menor posible nota en<br>Evaluación Futura #1</h3>
+                </div>
+                <div class="evaluacion-resultado">
+                    <div class="titulo-evaluacion-resultado">
+                        <h6>Evaluación Futura #1</h6>
+                        <p>35%</p>
+                    </div>
+                    <h3 class="nota-necesaria">La nota necesaria es 11</h3>
+                </div>
+                <div class="evaluacion-resultado">
+                    <div class="titulo-evaluacion-resultado">
+                        <h6>Evaluación Futura #2</h6>
+                        <p>5%</p>
+                    </div>
+                    <h3 class="nota-necesaria">La nota necesaria es 19</h3>
+                </div>
+            </div>
+
+        </div>
+    </section>
+  </form>
+</section>
