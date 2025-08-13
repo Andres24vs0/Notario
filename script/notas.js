@@ -1,4 +1,4 @@
-import { obtenerSimbolos } from "./index.js";
+import { obtenerSimbolos, crearEstructuraEvaluacion } from "./index.js";
 
 let zonaNotas;
 
@@ -12,7 +12,6 @@ let notaMaximaVacia;
 //Agregar y eliminar
 let cantEvaluacion;
 let simboloAgregar;
-let simboloEliminar;
 let botonAgregar;
 
 //Calcular
@@ -47,7 +46,6 @@ function inicializarNotas() {
     //Inicializar agregar y eliminar
     cantEvaluacion = 0;
     simboloAgregar = obtenerSimbolos("agregar");
-    simboloEliminar = obtenerSimbolos("eliminar");
     botonAgregar = document.getElementById("agregar");
     botonAgregar.innerHTML = simboloAgregar;
 
@@ -73,31 +71,6 @@ function inicializarNotas() {
     });
 }
 window.inicializarNotas = inicializarNotas;
-
-
-function crearEstructuraEvaluacion(numero) {
-    let evaluacion = `<div class="evaluacion" id="evaluacion-${numero}">
-            <div class="titulo-evaluacion">
-                <h6>Evaluacion #${numero}</h6>
-                <i class="fa eliminar" id="eliminar-${numero}">${simboloEliminar}</i>
-            </div>
-            <div class="inputs-evaluacion">
-                <div class="input-porcentaje">
-                    <div class="label-input">
-                        <label for="porcentaje-${numero}">Porcentaje:</label>
-                        <input type="number" id="porcentaje-${numero}" name="porcentaje-${numero}" class="porcentaje" placeholder="20" min="1" max="99" required>
-                    </div>
-                    <p class="porcentaje-texto">%</p>
-                </div>
-                
-                <div class="label-input">
-                    <label for="nota-${numero}">Nota Conseguida:</label>
-                    <input type="number" id="nota-${numero}" name="nota-${numero}" class="nota-conseguida" placeholder="15" min="1" max="100" required>
-                </div>
-            </div>
-        </div>`;
-    return evaluacion;
-}
 
 function crearEstructuraResultado(
     notaFinal,

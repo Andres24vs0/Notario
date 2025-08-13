@@ -13,6 +13,32 @@ export function obtenerSimbolos(descripcion) {
         .codigo;
 }
 
+const simboloEliminar =obtenerSimbolos("eliminar");
+
+export function crearEstructuraEvaluacion(numero) {
+    let evaluacion = `<div class="evaluacion" id="evaluacion-${numero}">
+            <div class="titulo-evaluacion">
+                <h6>Evaluacion #${numero}</h6>
+                <i class="fa eliminar" id="eliminar-${numero}">${simboloEliminar}</i>
+            </div>
+            <div class="inputs-evaluacion">
+                <div class="input-porcentaje">
+                    <div class="label-input">
+                        <label for="porcentaje-${numero}">Porcentaje:</label>
+                        <input type="number" id="porcentaje-${numero}" name="porcentaje-${numero}" class="porcentaje" placeholder="20" min="1" max="99" required>
+                    </div>
+                    <p class="porcentaje-texto">%</p>
+                </div>
+                
+                <div class="label-input">
+                    <label for="nota-${numero}">Nota Conseguida:</label>
+                    <input type="number" id="nota-${numero}" name="nota-${numero}" class="nota-conseguida" placeholder="15" min="1" max="100" required>
+                </div>
+            </div>
+        </div>`;
+    return evaluacion;
+}
+
 function cargarHTML(id, archivo) {
     return fetch("pages/" + archivo + ".html")
         .then((response) => {
@@ -88,6 +114,6 @@ export function cargarContenido(id, archivo) {
 
 document.addEventListener("DOMContentLoaded", () => {
     cargarContenido("navbar", "navbar");
-    cargarContenido("contenido", "notas");
+    cargarContenido("contenido", "prediccion");
     cargarContenido("footer", "footer");
 });
