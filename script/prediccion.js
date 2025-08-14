@@ -1,5 +1,5 @@
 /*
-            <h2 class="texto-resultado">Aún no se ha calculado <b>NINGUNA</b> predicción, <br> Ingrese los datos y presione <b>CALCULAR</b></h2>
+            <h2 id="texto-resultado">La nota <b>MÍNIMA</b> que debes de sacar en la evaluación<br>para aprobar la materia es <b>15</b><br>Y tu nota final sería <b>10.1</b> que redondeado seria <b>10</b><br><em class="imposible">Si no se redondea la nota final DESAPRUEBAS</em></h2>
             <h2 class="texto-resultado imposible">Ya <em>NO</em> existe forma de que apruebes la materia</h2>
             <h2 class="texto-resultado">La nota <b>MÍNIMA</b> que debes de sacar en la evaluación<br>para aprobar la materia es <b>15</b><br>Y tu nota final sería <b>10.1</b> que redondeado seria <b>10</b></h2>
 */
@@ -17,6 +17,7 @@ let notaMaximaVacia;
 let notaMaxima;
 let inputNotaMaxima;
 let inputNotaMinima;
+let notaMinima;
 
 // Evaluaciones realizadas
 let zonaRealizadas;
@@ -29,6 +30,11 @@ let seleccionActual;
 
 //Agregar y eliminar evaluaciones realizadas
 let botonAgregar;
+
+//resultados
+let variosResultados;
+let textoResultado;
+let botonCalcular;
 
 function inicializarPrediccion() {
     //nota maxima y minima
@@ -77,6 +83,18 @@ function inicializarPrediccion() {
     botonAgregar.addEventListener("click", () => {
         logicaAgregar();
     });
+
+    //Inicializacion resultados
+    textoResultado = document.getElementById("texto-resultado");
+    variosResultados = document.getElementById("varios-resultados");
+    botonCalcular = document.getElementById("calcular-nota");
+
+    botonCalcular.addEventListener("click", () => {
+        reiniciarResultados();
+        logicaCalcularUnaNotaFutura();
+    });
+
+    reiniciarResultados();
 }
 window.inicializarPrediccion = inicializarPrediccion;
 
@@ -178,6 +196,47 @@ function logicaEliminar(event) {
     }
 }
 
+function logicaCalcularNotaActual() {}
+
+function logicaCalcularUnaNotaFutura() {
+    notaMinima = parseFloat(inputNotaMinima.value);
+    let notaActual = 9;
+    notaActual = parseFloat(notaActual.toFixed(2));
+    let diferencia = notaMinima - notaActual;
+    let texto;
+    if (diferencia <= 0) {
+        let notaRedondeada = Math.round(parseFloat(notaActual));
+        texto = CrearEstructuraYaAprobado(notaActual, notaRedondeada);
+    } else {
+        const porcentaje =
+            parseInt(document.getElementById("porcentaje-futuro-1").value) /
+            100;
+        let notaFutura = diferencia / porcentaje;
+        notaFutura = Math.round(parseFloat(notaFutura));
+        if (notaFutura > notaMaxima) {
+            texto = CrearEstructuraDesaprobar();
+            if (!textoResultado.classList.contains("imposible")) {
+                textoResultado.classList.add("imposible");
+            }
+        } else {
+            let equivalencia = parseFloat((notaFutura * porcentaje).toFixed(2));
+            let notaFinal = notaActual + equivalencia;
+            if (notaFinal < notaMinima) {
+                notaFutura++;
+                equivalencia = parseFloat((notaFutura * porcentaje).toFixed(2));
+                notaFinal = notaActual + equivalencia;
+            }
+            let notaRedondeada = Math.round(parseFloat(notaFinal));
+            texto = crearEstructuraUnicoResultado(
+                parseFloat(notaFinal.toFixed(2)),
+                notaRedondeada,
+                notaFutura
+            );
+        }
+    }
+    textoResultado.innerHTML = texto;
+}
+
 function CrearEstructuraEvaluacionFutura(numero) {
     let evaluacion = `
                     <div class="evaluacion-futura" id="evaluacion-futura-${numero}">
@@ -195,4 +254,56 @@ function CrearEstructuraEvaluacionFutura(numero) {
                         </div>
                     </div>`;
     return evaluacion;
+}
+
+function crearEstructuraUnicoResultado(
+    notaFinal,
+    notaRedondeada,
+    notaFutura
+) {
+    let texto;
+    if (notaFinal == notaRedondeada) {
+        texto = `
+        La nota <b>MÍNIMA</b> que debes de sacar en la evaluación<br>para aprobar la materia es <b>${notaFutura}</b><br>Y tu nota final sería <b>${notaFinal}</b>`;
+    } else {
+        texto = `
+        La nota <b>MÍNIMA</b> que debes de sacar en la evaluación<br>para aprobar la materia es <b>${notaFutura}</b><br>Y tu nota final sería <b>${notaFinal}</b> que redondeado seria <b>${notaRedondeada}</b></em>`;
+    }
+
+    return texto;
+}
+
+function CrearEstructuraDesaprobar() {
+    let texto = `Ya <em>NO</em> existe forma de que apruebes la materia`;
+    return texto;
+}
+
+function CrearEstructuraYaAprobado(notaFinal, notaRedondeada) {
+    if (notaFinal == notaRedondeada) {
+        texto = `
+        Ya tienes la materia <b>APROBADA</b> con una calificación de <b>${notaFinal}</b>`;
+    } else {
+        texto = `
+        Ya tienes la materia <b>APROBADA</b> con una calificación de <b>${notaFinal}</b> que redondeado seria <b>${notaRedondeada}</b>`;
+    }
+    return texto;
+}
+
+function AunNoSeCalcula() {
+    let texto = `
+    Aún no se ha calculado <b>NINGUNA</b> predicción, <br> Ingrese los datos y presione <b>CALCULAR</b>`;
+    textoResultado.innerHTML = texto;
+}
+
+function reiniciarResultados() {
+    if (!variosResultados.classList.contains("inactivo")) {
+        variosResultados.classList.add("inactivo");
+    }
+    if (textoResultado.classList.contains("inactivo")) {
+        textoResultado.classList.remove("inactivo");
+    }
+    if (textoResultado.classList.contains("imposible")) {
+        textoResultado.classList.remove("imposible");
+    }
+    AunNoSeCalcula();
 }

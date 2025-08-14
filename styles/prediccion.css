@@ -211,6 +211,10 @@ h3{
     display: none;
 }
 
+.imposible{
+    color: var(--error-color);
+}
+
 em{
     font-style: normal;
     font-weight: bold;
