@@ -200,7 +200,7 @@ function logicaCalcularNotaActual() {}
 
 function logicaCalcularUnaNotaFutura() {
     notaMinima = parseFloat(inputNotaMinima.value);
-    let notaActual = 9;
+    let notaActual = 10;
     notaActual = parseFloat(notaActual.toFixed(2));
     let diferencia = notaMinima - notaActual;
     let texto;
@@ -279,6 +279,7 @@ function CrearEstructuraDesaprobar() {
 }
 
 function CrearEstructuraYaAprobado(notaFinal, notaRedondeada) {
+    let texto;
     if (notaFinal == notaRedondeada) {
         texto = `
         Ya tienes la materia <b>APROBADA</b> con una calificación de <b>${notaFinal}</b>`;
