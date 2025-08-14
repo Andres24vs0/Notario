@@ -1,4 +1,11 @@
-import { obtenerSimbolos, crearEstructuraEvaluacion } from "./index.js";
+import {
+    obtenerSimbolos,
+    crearEstructuraEvaluacion,
+    porcentajeTotal,
+    logicaErroresNotas,
+    logicaErroresPorcentajes,
+    logicaErroresGenerico,
+} from "./index.js";
 
 let zonaNotas;
 
@@ -37,7 +44,7 @@ function inicializarNotas() {
     });
 
     inputNotaMinima.addEventListener("input", (event) => {
-        if (logicaErroresNotas(event.target)) {
+        if (logicaErroresNotas(event.target, notaMaximaVacia, notaMaxima)) {
             notaMinima = event.target.value;
             console.log("Nota Minima: " + notaMinima);
         }
@@ -115,7 +122,7 @@ function agregarEvaluacion() {
 
     const nota = document.getElementById(`nota-${cantEvaluacion}`);
     nota.addEventListener("input", (event) => {
-        logicaErroresNotas(event.target);
+        logicaErroresNotas(event.target, notaMaximaVacia, notaMaxima);
     });
 }
 
@@ -139,57 +146,6 @@ function logicaEliminar(event) {
     }
 }
 
-function logicaErroresGenerico(input) {
-    let esValido = true;
-    if (!input.checkValidity()) {
-        input.classList.add("invalido");
-        input.reportValidity();
-        esValido = false;
-    }
-    if (esValido) {
-        input.classList.remove("invalido");
-    }
-    return esValido;
-}
-
-function logicaErroresPorcentajes(input) {
-    let esValido = true;
-    let cantidad = porcentajeTotal();
-    console.log("Porcentaje por ahora: " + cantidad);
-    if (cantidad > 100) {
-        input.setCustomValidity("Con este valor el porcentaje supera el 100%");
-        input.classList.add("invalido");
-        input.reportValidity();
-        esValido = false;
-    } else {
-        input.setCustomValidity("");
-        input.classList.remove("invalido");
-        esValido = logicaErroresGenerico(input);
-    }
-    return esValido;
-}
-
-function logicaErroresNotas(input) {
-    let esValido = true;
-    if (!notaMaximaVacia) {
-        if (parseFloat(input.value) > notaMaxima) {
-            input.setCustomValidity(
-                "El número debe de ser menor o igual a la nota máxima"
-            );
-            input.classList.add("invalido");
-            input.reportValidity();
-            esValido = false;
-        } else {
-            input.setCustomValidity("");
-            input.classList.remove("invalido");
-            esValido = logicaErroresGenerico(input);
-        }
-    } else {
-        esValido = logicaErroresGenerico(input);
-    }
-    return esValido;
-}
-
 function logicaAgregar() {
     const cantidad = porcentajeTotal();
     console.log("Porcentaje por ahora: " + cantidad);
@@ -206,24 +162,14 @@ function logicaAgregar() {
     }
 }
 
-function porcentajeTotal() {
-    const porcentajes = Array.from(document.querySelectorAll(".porcentaje"));
-    return porcentajes.reduce((acumulador, input) => {
-        let numero;
-        const valor = input.value;
-        if (valor === "") {
-            numero = 0;
-        } else {
-            numero = parseFloat(valor);
-        }
-        return acumulador + numero;
-    }, 0);
-}
-
 function formularioValido() {
     let esValido = true;
     let esValidoNotaMaxima = logicaErroresGenerico(inputNotaMaxima);
-    let esValidoNotaMinima = logicaErroresNotas(inputNotaMinima);
+    let esValidoNotaMinima = logicaErroresNotas(
+        inputNotaMinima,
+        notaMaximaVacia,
+        notaMaxima
+    );
     const porcentajes = document.querySelectorAll(".porcentaje");
     let esValidoPorcentajes = true;
     porcentajes.forEach((porcentaje) => {
@@ -242,7 +188,7 @@ function formularioValido() {
     const notas = document.querySelectorAll(".nota-conseguida");
     let esValidoNotas = true;
     notas.forEach((nota) => {
-        let temp = logicaErroresNotas(nota);
+        let temp = logicaErroresNotas(nota, notaMaximaVacia, notaMaxima);
         if (!temp) {
             esValidoNotas = false;
         }

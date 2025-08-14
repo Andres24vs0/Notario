@@ -27,70 +27,13 @@
                     <h2 class="titulin">Evaluaciones Realizadas</h2>
                     <h5 class="subtitulo">Aquí coloca las evaluaciones de las que ya conoces calificación</h5>
                 </div>
-                <div class="evaluacion" id="evaluacion-1">
-                    <div class="titulo-evaluacion">
-                        <h6>Evaluacion #1</h6>
-                        <i class="fa eliminar" id="eliminar-1">&#xf1f8;</i>
-                    </div>
-                    <div class="inputs-evaluacion">
-                        <div class="input-porcentaje">
-                            <div class="label-input">
-                                <label for="porcentaje-1">Porcentaje:</label>
-                                <input type="number" id="porcentaje-1" name="porcentaje-1" class="porcentaje" placeholder="20" min="1" max="99" required>
-                            </div>
-                            <p class="porcentaje-texto">%</p>
-                        </div>
-                        
-                        <div class="label-input">
-                            <label for="nota-1">Nota Conseguida:</label>
-                            <input type="number" id="nota-1" name="nota-1" class="nota-conseguida" placeholder="15" min="1" max="100" required>
-                        </div>
-                    </div>
+                <div id="zona-realizadas">
+                    
                 </div>
+                
 
-                <div class="evaluacion" id="evaluacion-2">
-                    <div class="titulo-evaluacion">
-                        <h6>Evaluacion #2</h6>
-                        <i class="fa eliminar" id="eliminar-2">&#xf1f8;</i>
-                    </div>
-                    <div class="inputs-evaluacion">
-                        <div class="input-porcentaje">
-                            <div class="label-input">
-                                <label for="porcentaje-2">Porcentaje:</label>
-                                <input type="number" id="porcentaje-2" name="porcentaje-2" class="porcentaje" placeholder="20" min="1" max="99" required>
-                            </div>
-                            <p class="porcentaje-texto">%</p>
-                        </div>
-                        
-                        <div class="label-input">
-                            <label for="nota-2">Nota Conseguida:</label>
-                            <input type="number" id="nota-2" name="nota-2" class="nota-conseguida" placeholder="15" min="1" max="100" required>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="evaluacion" id="evaluacion-3">
-                    <div class="titulo-evaluacion">
-                        <h6>Evaluacion #3</h6>
-                        <i class="fa eliminar" id="eliminar-3">&#xf1f8;</i>
-                    </div>
-                    <div class="inputs-evaluacion">
-                        <div class="input-porcentaje">
-                            <div class="label-input">
-                                <label for="porcentaje-3">Porcentaje:</label>
-                                <input type="number" id="porcentaje-3" name="porcentaje-3" class="porcentaje" placeholder="20" min="1" max="99" required>
-                            </div>
-                            <p class="porcentaje-texto">%</p>
-                        </div>
-                        
-                        <div class="label-input">
-                            <label for="nota-3">Nota Conseguida:</label>
-                            <input type="number" id="nota-3" name="nota-3" class="nota-conseguida" placeholder="15" min="1" max="100" required>
-                        </div>
-                    </div>
-                </div>
                 <div class="boton-form">
-                    <i class="fa" id="agregar">&#xf055;</i>
+                    <i class="fa" id="agregar"></i>
                 </div>
             </section>
 
@@ -105,39 +48,12 @@
                     <div class="label-select">
                         <label for="numero-evaluaciones">Número de evaluaciones:</label>
                         <select name="numero-evaluaciones" id="numero-evaluaciones">
-                            <option value="1">1</option>
-                            <option value="2" selected>2</option>
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
                         </select>
                     </div>
                 </div>
-                <div class="evaluacion-futura" id="evaluacion-futura-1">
-                    <div class="titulo-evaluacion">
-                        <h6>Evaluacion Futura #1</h6>
-                    </div>
-                    <div class="inputs-futuro">
-                        <div class="input-porcentaje">
-                            <div class="label-input">
-                                <label for="porcentaje-futuro-1">Porcentaje:</label>
-                                <input type="number" id="porcentaje-futuro-1" name="porcentaje-futuro-1" class="porcentaje-futuro" placeholder="20" min="1" max="99" required>
-                            </div>
-                            <p class="porcentaje-texto">%</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="evaluacion-futura" id="evaluacion-futura-2">
-                    <div class="titulo-evaluacion">
-                        <h6>Evaluacion Futura #2</h6>
-                    </div>
-                    <div class="inputs-futuro">
-                        <div class="input-porcentaje">
-                            <div class="label-input">
-                                <label for="porcentaje-futuro-2">Porcentaje:</label>
-                                <input type="number" id="porcentaje-futuro-2" name="porcentaje-futuro-2" class="porcentaje-futuro" placeholder="20" min="1" max="99" required>
-                            </div>
-                            <p class="porcentaje-texto">%</p>
-                        </div>
-                    </div>
+                <div id="zona-futuras">
                 </div>
                 <div class="boton-form">
                     <input type="button" value="Calcular" id="calcular-nota">
