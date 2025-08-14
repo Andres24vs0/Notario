@@ -177,8 +177,8 @@ function logicaEvaluacionFutura() {
 }
 
 function logicaEliminar(event) {
-    if (cantEvaluacionesRealizadas <= 2) {
-        alert("Debe haber al menos dos evaluaciones.");
+    if (cantEvaluacionesRealizadas <= 1) {
+        alert("Debe haber al menos una evaluacion.");
     } else {
         const evaluacion = event.target.closest(".evaluacion");
         zonaRealizadas.removeChild(evaluacion);
