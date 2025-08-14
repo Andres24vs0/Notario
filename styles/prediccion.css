@@ -196,18 +196,18 @@ h3{
     align-items: center;
 }
 
-.texto-resultado{
+#texto-resultado{
     color: black;
     text-align: center;
     font-weight: normal;
     margin: 4vw;
 }
 
-.texto-resultado.imposible{
+#texto-resultado.imposible{
     color: var(--error-color);
 }
 
-.texto-resultado.inactivo{
+#texto-resultado.inactivo{
     display: none;
 }
 
