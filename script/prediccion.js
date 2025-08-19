@@ -1,8 +1,3 @@
-/*
-            <h2 id="texto-resultado">La nota <b>MÍNIMA</b> que debes de sacar en la evaluación<br>para aprobar la materia es <b>15</b><br>Y tu nota final sería <b>10.1</b> que redondeado seria <b>10</b><br><em class="imposible">Si no se redondea la nota final DESAPRUEBAS</em></h2>
-            <h2 class="texto-resultado imposible">Ya <em>NO</em> existe forma de que apruebes la materia</h2>
-            <h2 class="texto-resultado">La nota <b>MÍNIMA</b> que debes de sacar en la evaluación<br>para aprobar la materia es <b>15</b><br>Y tu nota final sería <b>10.1</b> que redondeado seria <b>10</b></h2>
-*/
 import {
     obtenerSimbolos,
     crearEstructuraEvaluacion,
@@ -10,7 +5,8 @@ import {
     logicaErroresNotas,
     logicaErroresPorcentajes,
     logicaErroresGenerico,
-    formularioValido
+    formularioValido,
+    logicaEliminarConcreto,
 } from "./index.js";
 
 //Nota Maxima
@@ -36,6 +32,17 @@ let botonAgregar;
 let variosResultados;
 let textoResultado;
 let botonCalcular;
+
+class ResultadoDos {
+    constructor(porcentaje1, nota1, porcentaje2, nota2, notaFinal) {
+        this.porcentaje1 = parseInt(porcentaje1);
+        this.porcentaje2 = parseInt(porcentaje2);
+        this.nota1 = parseInt(nota1);
+        this.nota2 = parseInt(nota2);
+        this.notaFinal = parseFloat(notaFinal.toFixed(2));
+        this.notaRedondeada = Math.round(parseFloat(notaFinal));
+    }
+}
 
 function inicializarPrediccion() {
     //nota maxima y minima
@@ -92,12 +99,21 @@ function inicializarPrediccion() {
 
     botonCalcular.addEventListener("click", () => {
         reiniciarResultados();
-        if (formularioValido(inputNotaMaxima, inputNotaMinima, notaMaximaVacia, notaMaxima)) {
+        if (
+            formularioValido(
+                inputNotaMaxima,
+                inputNotaMinima,
+                notaMaximaVacia,
+                notaMaxima
+            )
+        ) {
             if (seleccionActual == 1) {
                 logicaCalcularUnaNotaFutura();
+            } else if (seleccionActual == 2) {
+                logicaCalcularDosNotasFuturas();
             } else {
                 alert(
-                    "Por ahora solo se puede calcular la predicción con una evaluación futura"
+                    "Por favor, seleccione una cantidad válida de evaluaciones futuras."
                 );
             }
         }
@@ -194,40 +210,30 @@ function logicaEliminar(event) {
         cantEvaluacionesRealizadas--;
         const evaluacionesRestantes = document.querySelectorAll(".evaluacion");
         evaluacionesRestantes.forEach((evaluacion, index) => {
-            evaluacion.id = `evaluacion-${index + 1}`;
-            const titulo = evaluacion.querySelector(".titulo-evaluacion h6");
-            titulo.innerHTML = `Evaluacion #${index + 1}`;
-            const botonEliminar = evaluacion.querySelector(
-                ".titulo-evaluacion .eliminar"
-            );
-            botonEliminar.id = `eliminar-${index + 1}`;
+            logicaEliminarConcreto(evaluacion, index);
         });
+        console.log("Evaluaciones Realizadas: " + cantEvaluacionesRealizadas);
     }
 }
 
-
-
 function logicaCalcularNotaActual() {
     let notaActual = 0;
-    for(let i = 0; i < cantEvaluacionesRealizadas; i++) {
+    for (let i = 0; i < cantEvaluacionesRealizadas; i++) {
         const porcentaje = parseFloat(
             document.getElementById(`porcentaje-${i + 1}`).value
         );
-        const nota = parseFloat(
-            document.getElementById(`nota-${i + 1}`).value
-        );
+        const nota = parseFloat(document.getElementById(`nota-${i + 1}`).value);
         if (isNaN(porcentaje) || isNaN(nota)) {
             continue;
         }
         notaActual += (porcentaje / 100) * nota;
     }
-    return notaActual;
+    return parseFloat(notaActual.toFixed(2));
 }
 
 function logicaCalcularUnaNotaFutura() {
     notaMinima = parseFloat(inputNotaMinima.value);
     let notaActual = logicaCalcularNotaActual();
-    notaActual = parseFloat(notaActual.toFixed(2));
     let diferencia = notaMinima - notaActual;
     let texto;
     if (diferencia <= 0) {
@@ -240,10 +246,7 @@ function logicaCalcularUnaNotaFutura() {
         let notaFutura = diferencia / porcentaje;
         notaFutura = Math.round(parseFloat(notaFutura));
         if (notaFutura > notaMaxima) {
-            texto = CrearEstructuraDesaprobar();
-            if (!textoResultado.classList.contains("imposible")) {
-                textoResultado.classList.add("imposible");
-            }
+            desaprobar();
         } else {
             let equivalencia = parseFloat((notaFutura * porcentaje).toFixed(2));
             let notaFinal = notaActual + equivalencia;
@@ -261,6 +264,160 @@ function logicaCalcularUnaNotaFutura() {
         }
     }
     textoResultado.innerHTML = texto;
+}
+
+function logicaCalcularDosNotasFuturas() {
+    notaMinima = parseFloat(inputNotaMinima.value);
+    let notaActual = logicaCalcularNotaActual();
+    let diferencia = parseFloat((notaMinima - notaActual).toFixed(2));
+    console.log("Nota Actual: " + notaActual);
+    console.log("Diferencia: " + diferencia);
+    const porcentaje1 =
+        parseInt(document.getElementById("porcentaje-futuro-1").value) / 100;
+    const porcentaje2 =
+        parseInt(document.getElementById("porcentaje-futuro-2").value) / 100;
+    if (diferencia <= 0) {
+        let notaRedondeada = Math.round(parseFloat(notaActual));
+        textoResultado.innerHTML = CrearEstructuraYaAprobado(
+            notaActual,
+            notaRedondeada
+        );
+    } else if (dosNotasImposible(porcentaje1, porcentaje2, diferencia)) {
+        desaprobar();
+    } else {
+        let resultados = [];
+        for (let nota1 = 0; nota1 <= notaMaxima; nota1++) {
+            let nota2 = Math.round(
+                (diferencia - porcentaje1 * nota1) / porcentaje2
+            );
+            if (nota2 < 0) {
+                if (resultados.length > 0) {
+                    if (resultados[resultados.length - 1].nota2 != 0) {
+                        nota2 = 0;
+                        nota1 = Math.round(
+                            (diferencia - porcentaje2 * nota2) / porcentaje1
+                        );
+                        let calculoFuturo = parseFloat(
+                            (nota1 * porcentaje1 + nota2 * porcentaje2).toFixed(
+                                2
+                            )
+                        );
+                        if (diferencia <= calculoFuturo) {
+                            let notaFinal = parseFloat(
+                                (notaActual + calculoFuturo).toFixed(2)
+                            );
+                            resultados.push(
+                                new ResultadoDos(
+                                    porcentaje1 * 100,
+                                    nota1,
+                                    porcentaje2 * 100,
+                                    nota2,
+                                    notaFinal
+                                )
+                            );
+                            console.log(resultados[resultados.length - 1]);
+                            break;
+                        }
+                    }
+                }
+                console.log(`Nota 2 alcanzó su menor valor, acabando...`);
+                break;
+            }
+            if (nota2 > notaMaxima) {
+                continue;
+            }
+            let calculoFuturo = parseFloat(
+                (nota1 * porcentaje1 + nota2 * porcentaje2).toFixed(2)
+            );
+            if (diferencia > calculoFuturo) {
+                nota2++;
+                calculoFuturo = parseFloat(
+                    (nota1 * porcentaje1 + nota2 * porcentaje2).toFixed(2)
+                );
+            }
+            if (resultados.length > 0) {
+                if (resultados[resultados.length - 1].nota2 == nota2) {
+                    console.log(`Nota 2 ${nota2} ya existe, saltando...`);
+                    continue;
+                }
+            }
+            let notaFinal = parseFloat((notaActual + calculoFuturo).toFixed(2));
+            resultados.push(
+                new ResultadoDos(
+                    porcentaje1 * 100,
+                    nota1,
+                    porcentaje2 * 100,
+                    nota2,
+                    notaFinal
+                )
+            );
+            console.log(resultados[resultados.length - 1]);
+        }
+        if (resultados.length === 0) {
+            desaprobar();
+        } else {
+            habilitarVariosResultados();
+            switch (resultados.length) {
+                case 1:
+                    agregarDivisor();
+                    variosResultados.innerHTML += crearEstructuraDosResultados(
+                        1,
+                        2,
+                        resultados[0]
+                    );
+                    agregarDivisor();
+                    break;
+                case 2:
+                    variosResultados.innerHTML += crearEstructuraDosResultados(
+                        1,
+                        1,
+                        resultados[0]
+                    );
+                    agregarDivisor();
+                    variosResultados.innerHTML += crearEstructuraDosResultados(
+                        2,
+                        3,
+                        resultados[1]
+                    );
+                    break;
+                default:
+                    variosResultados.innerHTML += crearEstructuraDosResultados(
+                        1,
+                        1,
+                        resultados[0]
+                    );
+                    agregarDivisor();
+                    variosResultados.innerHTML += crearEstructuraDosResultados(
+                        2,
+                        2,
+                        resultados[Math.floor(resultados.length / 2) - 1]
+                    );
+                    agregarDivisor();
+                    variosResultados.innerHTML += crearEstructuraDosResultados(
+                        3,
+                        3,
+                        resultados[resultados.length - 1]
+                    );
+                    break;
+            }
+        }
+    }
+}
+
+function dosNotasImposible(porcentaje1, porcentaje2, diferencia) {
+    let primeraOpcion = Math.round(
+        (diferencia - porcentaje1 * 0) / porcentaje2
+    );
+    let ultimaOpcion = Math.round(
+        (diferencia - porcentaje1 * notaMaxima) / porcentaje2
+    );
+    if (
+        (primeraOpcion < 0 && ultimaOpcion < 0) ||
+        (primeraOpcion > notaMaxima && ultimaOpcion > notaMaxima)
+    ) {
+        return true;
+    }
+    return false;
 }
 
 function CrearEstructuraEvaluacionFutura(numero) {
@@ -282,11 +439,7 @@ function CrearEstructuraEvaluacionFutura(numero) {
     return evaluacion;
 }
 
-function crearEstructuraUnicoResultado(
-    notaFinal,
-    notaRedondeada,
-    notaFutura
-) {
+function crearEstructuraUnicoResultado(notaFinal, notaRedondeada, notaFutura) {
     let texto;
     if (notaFinal == notaRedondeada) {
         texto = `
@@ -322,6 +475,65 @@ function AunNoSeCalcula() {
     textoResultado.innerHTML = texto;
 }
 
+function crearEstructuraDosResultados(numero, opcion, resultado) {
+    let texto = `
+                <div class="resultado" id="resultado-${numero}">
+                    <div class="titulo-resultado">`;
+    switch (opcion) {
+        case 1:
+            texto += `<h3>Menor posible nota en<br>Evaluación Futura #1</h3>`;
+            break;
+        case 2:
+            texto += `<h3>Notas medias en<br>ambas evaluaciones</h3>`;
+            break;
+        case 3:
+            texto += `<h3>Menor posible nota en<br>Evaluación Futura #2</h3>`;
+            break;
+        default:
+            texto += `<h3>Predicción de nota</h3>`;
+    }
+    texto += `
+                    </div>
+                    <div class="evaluacion-resultado">
+                        <div class="titulo-evaluacion-resultado">
+                            <h6>Evaluación Futura #1</h6>
+                            <p>${resultado.porcentaje1}%</p>
+                        </div>
+                        <h3 class="nota-necesaria">La nota necesaria es ${resultado.nota1}</h3>
+                    </div>
+                    <div class="evaluacion-resultado">
+                        <div class="titulo-evaluacion-resultado">
+                            <h6>Evaluación Futura #2</h6>
+                            <p>${resultado.porcentaje2}%</p>
+                        </div>
+                        <h3 class="nota-necesaria">La nota necesaria es ${resultado.nota2}</h3>
+                    </div>
+                    <div class="final">
+                        <h3 class="nota-final">La nota final sería <b>${resultado.notaFinal}</b>`;
+    if (resultado.notaFinal == resultado.notaRedondeada) {
+        texto += `</h3>`;
+    } else {
+        texto += ` <br>que redondeado seria <b>${resultado.notaRedondeada}</b></h3>`;
+    }
+    texto += `
+                    </div>
+                </div>`;
+    return texto;
+}
+
+function agregarDivisor() {
+    const zona = document.getElementById("varios-resultados");
+    zona.innerHTML += `
+    <div class="divisor"></div> `;
+}
+
+function desaprobar() {
+    textoResultado.innerHTML = CrearEstructuraDesaprobar();
+    if (!textoResultado.classList.contains("imposible")) {
+        textoResultado.classList.add("imposible");
+    }
+}
+
 function reiniciarResultados() {
     if (!variosResultados.classList.contains("inactivo")) {
         variosResultados.classList.add("inactivo");
@@ -333,4 +545,14 @@ function reiniciarResultados() {
         textoResultado.classList.remove("imposible");
     }
     AunNoSeCalcula();
+}
+
+function habilitarVariosResultados() {
+    variosResultados.innerHTML = "";
+    if (variosResultados.classList.contains("inactivo")) {
+        variosResultados.classList.remove("inactivo");
+    }
+    if (!textoResultado.classList.contains("inactivo")) {
+        textoResultado.classList.add("inactivo");
+    }
 }

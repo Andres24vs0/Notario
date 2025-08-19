@@ -5,7 +5,8 @@ import {
     logicaErroresNotas,
     logicaErroresPorcentajes,
     logicaErroresGenerico,
-    formularioValido
+    formularioValido,
+    logicaEliminarConcreto
 } from "./index.js";
 
 let zonaNotas;
@@ -136,13 +137,7 @@ function logicaEliminar(event) {
         cantEvaluacion--;
         const evaluacionesRestantes = document.querySelectorAll(".evaluacion");
         evaluacionesRestantes.forEach((evaluacion, index) => {
-            evaluacion.id = `evaluacion-${index + 1}`;
-            const titulo = evaluacion.querySelector(".titulo-evaluacion h6");
-            titulo.innerHTML = `Evaluacion #${index + 1}`;
-            const botonEliminar = evaluacion.querySelector(
-                ".titulo-evaluacion .eliminar"
-            );
-            botonEliminar.id = `eliminar-${index + 1}`;
+            logicaEliminarConcreto(evaluacion, index) 
         });
     }
 }

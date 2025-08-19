@@ -104,7 +104,38 @@ export function logicaErroresNotas(input, notaMaximaVacia, notaMaxima) {
     return esValido;
 }
 
-export function formularioValido(inputNotaMaxima, inputNotaMinima, notaMaximaVacia, notaMaxima) {
+export function logicaEliminarConcreto(evaluacion, index) {
+    evaluacion.id = `evaluacion-${index + 1}`;
+    const titulo = evaluacion.querySelector(".titulo-evaluacion h6");
+    titulo.innerHTML = `Evaluacion #${index + 1}`;
+    const botonEliminar = evaluacion.querySelector(
+        ".titulo-evaluacion .eliminar"
+    );
+    botonEliminar.id = `eliminar-${index + 1}`;
+    const nota = evaluacion.querySelector(".label-input .nota-conseguida");
+    nota.id = `nota-${index + 1}`;
+    nota.setAttribute("name", `nota-${index + 1}`);
+    const labelsNota = evaluacion.querySelectorAll(".label-input label");
+    if (labelsNota.length > 1) {
+        labelsNota[1].setAttribute("for", `nota-${index + 1}`);
+    }
+    const porcentaje = evaluacion.querySelector(
+        ".input-porcentaje .label-input .porcentaje"
+    );
+    porcentaje.id = `porcentaje-${index + 1}`;
+    porcentaje.setAttribute("name", `porcentaje-${index + 1}`);
+    const labelPorcentaje = evaluacion.querySelector(
+        ".input-porcentaje .label-input label"
+    );
+    labelPorcentaje.setAttribute("for", `porcentaje-${index + 1}`);
+}
+
+export function formularioValido(
+    inputNotaMaxima,
+    inputNotaMinima,
+    notaMaximaVacia,
+    notaMaxima
+) {
     let esValido = true;
     let esValidoNotaMaxima = logicaErroresGenerico(inputNotaMaxima);
     let esValidoNotaMinima = logicaErroresNotas(
