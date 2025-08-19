@@ -10,6 +10,7 @@ import {
     logicaErroresNotas,
     logicaErroresPorcentajes,
     logicaErroresGenerico,
+    formularioValido
 } from "./index.js";
 
 //Nota Maxima
@@ -91,7 +92,15 @@ function inicializarPrediccion() {
 
     botonCalcular.addEventListener("click", () => {
         reiniciarResultados();
-        logicaCalcularUnaNotaFutura();
+        if (formularioValido(inputNotaMaxima, inputNotaMinima, notaMaximaVacia, notaMaxima)) {
+            if (seleccionActual == 1) {
+                logicaCalcularUnaNotaFutura();
+            } else {
+                alert(
+                    "Por ahora solo se puede calcular la predicción con una evaluación futura"
+                );
+            }
+        }
     });
 
     reiniciarResultados();
@@ -196,11 +205,28 @@ function logicaEliminar(event) {
     }
 }
 
-function logicaCalcularNotaActual() {}
+
+
+function logicaCalcularNotaActual() {
+    let notaActual = 0;
+    for(let i = 0; i < cantEvaluacionesRealizadas; i++) {
+        const porcentaje = parseFloat(
+            document.getElementById(`porcentaje-${i + 1}`).value
+        );
+        const nota = parseFloat(
+            document.getElementById(`nota-${i + 1}`).value
+        );
+        if (isNaN(porcentaje) || isNaN(nota)) {
+            continue;
+        }
+        notaActual += (porcentaje / 100) * nota;
+    }
+    return notaActual;
+}
 
 function logicaCalcularUnaNotaFutura() {
     notaMinima = parseFloat(inputNotaMinima.value);
-    let notaActual = 10;
+    let notaActual = logicaCalcularNotaActual();
     notaActual = parseFloat(notaActual.toFixed(2));
     let diferencia = notaMinima - notaActual;
     let texto;

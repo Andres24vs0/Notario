@@ -32,7 +32,7 @@ export function crearEstructuraEvaluacion(numero) {
                 
                 <div class="label-input">
                     <label for="nota-${numero}">Nota Conseguida:</label>
-                    <input type="number" id="nota-${numero}" name="nota-${numero}" class="nota-conseguida" placeholder="15" min="1" max="100" required>
+                    <input type="number" id="nota-${numero}" name="nota-${numero}" class="nota-conseguida" placeholder="15" min="1" max="100" step="any" required>
                 </div>
             </div>
         </div>`;
@@ -100,6 +100,48 @@ export function logicaErroresNotas(input, notaMaximaVacia, notaMaxima) {
         }
     } else {
         esValido = logicaErroresGenerico(input);
+    }
+    return esValido;
+}
+
+export function formularioValido(inputNotaMaxima, inputNotaMinima, notaMaximaVacia, notaMaxima) {
+    let esValido = true;
+    let esValidoNotaMaxima = logicaErroresGenerico(inputNotaMaxima);
+    let esValidoNotaMinima = logicaErroresNotas(
+        inputNotaMinima,
+        notaMaximaVacia,
+        notaMaxima
+    );
+    const porcentajes = document.querySelectorAll(".porcentaje");
+    let esValidoPorcentajes = true;
+    porcentajes.forEach((porcentaje) => {
+        let temp = logicaErroresPorcentajes(porcentaje);
+        if (!temp) {
+            esValidoPorcentajes = false;
+        }
+    });
+    if (esValidoPorcentajes) {
+        if (porcentajeTotal() < 100) {
+            porcentajes[0].setCustomValidity("Los porcentajes no suman 100%");
+            porcentajes[0].reportValidity();
+            esValidoPorcentajes = false;
+        }
+    }
+    const notas = document.querySelectorAll(".nota-conseguida");
+    let esValidoNotas = true;
+    notas.forEach((nota) => {
+        let temp = logicaErroresNotas(nota, notaMaximaVacia, notaMaxima);
+        if (!temp) {
+            esValidoNotas = false;
+        }
+    });
+    if (
+        !esValidoNotaMaxima ||
+        !esValidoNotaMinima ||
+        !esValidoPorcentajes ||
+        !esValidoNotas
+    ) {
+        esValido = false;
     }
     return esValido;
 }
