@@ -331,6 +331,9 @@ function logicaCalcularDosNotasFuturas() {
             );
             if (diferencia > calculoFuturo) {
                 nota2++;
+                if (nota2 > notaMaxima) {
+                    continue;
+                }
                 calculoFuturo = parseFloat(
                     (nota1 * porcentaje1 + nota2 * porcentaje2).toFixed(2)
                 );
@@ -408,8 +411,9 @@ function dosNotasImposible(porcentaje1, porcentaje2, diferencia) {
     let primeraOpcion = Math.round(
         (diferencia - porcentaje1 * 0) / porcentaje2
     );
-    let ultimaOpcion = Math.round(
-        (diferencia - porcentaje1 * notaMaxima) / porcentaje2
+    let ultimaOpcion = (diferencia - porcentaje1 * notaMaxima) / porcentaje2;
+    console.log(
+        `Primera Opción: ${primeraOpcion}, Última Opción: ${ultimaOpcion}`
     );
     if (
         (primeraOpcion < 0 && ultimaOpcion < 0) ||
