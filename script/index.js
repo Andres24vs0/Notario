@@ -32,7 +32,7 @@ export function crearEstructuraEvaluacion(numero) {
                 
                 <div class="label-input">
                     <label for="nota-${numero}">Nota Conseguida:</label>
-                    <input type="number" id="nota-${numero}" name="nota-${numero}" class="nota-conseguida" placeholder="15" min="1" max="100" step="any" required>
+                    <input type="number" id="nota-${numero}" name="nota-${numero}" class="nota-conseguida" placeholder="15" min="0" max="100" step="any" required>
                 </div>
             </div>
         </div>`;
