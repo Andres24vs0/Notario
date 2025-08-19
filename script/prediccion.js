@@ -390,7 +390,7 @@ function logicaCalcularDosNotasFuturas() {
                     variosResultados.innerHTML += crearEstructuraDosResultados(
                         2,
                         2,
-                        resultados[Math.floor(resultados.length / 2) - 1]
+                        resultados[Math.round(resultados.length / 2) - 1]
                     );
                     agregarDivisor();
                     variosResultados.innerHTML += crearEstructuraDosResultados(
