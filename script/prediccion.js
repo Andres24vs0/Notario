@@ -32,6 +32,7 @@ let botonAgregar;
 let variosResultados;
 let textoResultado;
 let botonCalcular;
+let resultadoPrediccion;
 
 class ResultadoDos {
     constructor(porcentaje1, nota1, porcentaje2, nota2, notaFinal) {
@@ -96,6 +97,7 @@ function inicializarPrediccion() {
     textoResultado = document.getElementById("texto-resultado");
     variosResultados = document.getElementById("varios-resultados");
     botonCalcular = document.getElementById("calcular-nota");
+    resultadoPrediccion = document.getElementById("resultado-prediccion");
 
     botonCalcular.addEventListener("click", () => {
         reiniciarResultados();
@@ -116,6 +118,7 @@ function inicializarPrediccion() {
                     "Por favor, seleccione una cantidad válida de evaluaciones futuras."
                 );
             }
+            resultadoPrediccion.scrollIntoView({ behavior: "smooth" });
         }
     });
 

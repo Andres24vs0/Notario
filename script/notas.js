@@ -76,6 +76,7 @@ function inicializarNotas() {
         console.log(esValido);
         if (esValido) {
             calcularNotaFinal();
+            resultado.scrollIntoView({ behavior: "smooth" });
         }
     });
 }
