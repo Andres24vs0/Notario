@@ -267,7 +267,6 @@ function logicaCalcularUnaNotaFutura() {
             textoResultado.innerHTML = texto;
         }
     }
-    
 }
 
 function logicaCalcularDosNotasFuturas() {
@@ -363,49 +362,31 @@ function logicaCalcularDosNotasFuturas() {
         if (resultados.length === 0) {
             desaprobar();
         } else {
+            let primerResultadoOpcionTitulo = 1;
+            if(resultados.length === 1){
+                primerResultadoOpcionTitulo=2;
+            }
             habilitarVariosResultados();
-            switch (resultados.length) {
-                case 1:
-                    agregarDivisor();
-                    variosResultados.innerHTML += crearEstructuraDosResultados(
-                        1,
-                        2,
-                        resultados[0]
-                    );
-                    agregarDivisor();
-                    break;
-                case 2:
-                    variosResultados.innerHTML += crearEstructuraDosResultados(
-                        1,
-                        1,
-                        resultados[0]
-                    );
-                    agregarDivisor();
-                    variosResultados.innerHTML += crearEstructuraDosResultados(
-                        2,
-                        3,
-                        resultados[1]
-                    );
-                    break;
-                default:
-                    variosResultados.innerHTML += crearEstructuraDosResultados(
-                        1,
-                        1,
-                        resultados[0]
-                    );
-                    agregarDivisor();
-                    variosResultados.innerHTML += crearEstructuraDosResultados(
-                        2,
-                        2,
-                        resultados[Math.round(resultados.length / 2) - 1]
-                    );
-                    agregarDivisor();
-                    variosResultados.innerHTML += crearEstructuraDosResultados(
-                        3,
-                        3,
-                        resultados[resultados.length - 1]
-                    );
-                    break;
+            variosResultados.innerHTML += crearEstructuraDosResultados(
+                1,
+                primerResultadoOpcionTitulo,
+                resultados[0]
+            );
+            if (resultados.length > 2) {
+                agregarDivisor();
+                variosResultados.innerHTML += crearEstructuraDosResultados(
+                    2,
+                    2,
+                    resultados[Math.round(resultados.length / 2) - 1]
+                );
+            }
+            if (resultados.length > 1) {
+                agregarDivisor();
+                variosResultados.innerHTML += crearEstructuraDosResultados(
+                    3,
+                    3,
+                    resultados[resultados.length - 1]
+                );
             }
         }
     }
