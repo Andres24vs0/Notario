@@ -264,9 +264,10 @@ function logicaCalcularUnaNotaFutura() {
                 notaRedondeada,
                 notaFutura
             );
+            textoResultado.innerHTML = texto;
         }
     }
-    textoResultado.innerHTML = texto;
+    
 }
 
 function logicaCalcularDosNotasFuturas() {
