@@ -239,9 +239,13 @@ function logicaCalcularUnaNotaFutura() {
     let notaActual = logicaCalcularNotaActual();
     let diferencia = notaMinima - notaActual;
     let texto;
+    console.log("Nota Actual: " + notaActual);
+    console.log("Diferencia: " + diferencia);
     if (diferencia <= 0) {
+        console.log("Ya aprobaste");
         let notaRedondeada = Math.round(parseFloat(notaActual));
         texto = CrearEstructuraYaAprobado(notaActual, notaRedondeada);
+        textoResultado.innerHTML = texto;
     } else {
         const porcentaje =
             parseInt(document.getElementById("porcentaje-futuro-1").value) /
