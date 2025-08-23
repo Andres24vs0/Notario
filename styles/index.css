@@ -310,4 +310,24 @@ b{
     .eliminar{
         font-size: 5.5vw;
     }
+
+    .evaluacion{
+        padding-top: 1.5%;
+        padding-bottom: 1.5%;
+        border-bottom: 0.75vw solid var(--primary-color);
+    }
+
+    #agregar{
+        font-size: 5.5vw;
+    }
+
+    select{
+        font-size: 3.5vw;
+        border: 2.5px solid var(--secondary-color);
+    }
+
+    .label-select{
+        grid-template-columns: calc(45% - 0.25vw) calc(30% - 0.25vw);
+        gap: 0.5vw;
+    }
 }

@@ -252,6 +252,6 @@ export function cargarContenido(id, archivo) {
 
 document.addEventListener("DOMContentLoaded", () => {
     cargarContenido("navbar", "navbar");
-    cargarContenido("contenido", "prediccion");
+    cargarContenido("contenido", "notas");
     cargarContenido("footer", "footer");
 });

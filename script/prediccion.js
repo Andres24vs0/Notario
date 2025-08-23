@@ -32,7 +32,7 @@ let botonAgregar;
 let variosResultados;
 let textoResultado;
 let botonCalcular;
-let resultadoPrediccion;
+let parteInferior;
 
 class ResultadoDos {
     constructor(porcentaje1, nota1, porcentaje2, nota2, notaFinal) {
@@ -97,7 +97,7 @@ function inicializarPrediccion() {
     textoResultado = document.getElementById("texto-resultado");
     variosResultados = document.getElementById("varios-resultados");
     botonCalcular = document.getElementById("calcular-nota");
-    resultadoPrediccion = document.getElementById("resultado-prediccion");
+    parteInferior = document.getElementById("parte-inferior");
 
     botonCalcular.addEventListener("click", () => {
         reiniciarResultados();
@@ -118,7 +118,7 @@ function inicializarPrediccion() {
                     "Por favor, seleccione una cantidad válida de evaluaciones futuras."
                 );
             }
-            resultadoPrediccion.scrollIntoView({ behavior: "smooth" });
+            parteInferior.scrollIntoView({ behavior: "smooth" });
         }
     });
 
@@ -431,7 +431,7 @@ function dosNotasImposible(porcentaje1, porcentaje2, diferencia) {
 function CrearEstructuraEvaluacionFutura(numero) {
     let evaluacion = `
                     <div class="evaluacion-futura" id="evaluacion-futura-${numero}">
-                        <div class="titulo-evaluacion">
+                        <div class="titulo-evaluacion futura">
                             <h6>Evaluacion Futura #${numero}</h6>
                         </div>
                         <div class="inputs-futuro">
