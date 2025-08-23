@@ -324,6 +324,7 @@ b{
     select{
         font-size: 3.5vw;
         border: 2.5px solid var(--secondary-color);
+        background-color: var(--text-color);
     }
 
     .label-select{
