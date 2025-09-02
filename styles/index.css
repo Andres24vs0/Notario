@@ -201,13 +201,13 @@ h6{
     width: 2vw;
 }
 
-#agregar{
+.agregar{
     font-size: 3.5vw;
     color: var(--secondary-color);
     cursor: pointer;
 }
 
-#agregar:hover{
+.agregar:hover{
     color: var(--hover-text-color);
 }
 
@@ -317,7 +317,7 @@ b{
         border-bottom: 0.75vw solid var(--primary-color);
     }
 
-    #agregar{
+    .agregar{
         font-size: 5.5vw;
     }
 
