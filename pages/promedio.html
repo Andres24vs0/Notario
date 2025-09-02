@@ -1,1 +1,199 @@
-Promedio
+<section id="promedio">
+  <h2>Cálculo de Promedio</h2>
+  <h5>Calcula tu promedio final y tu promedio de cada periodo</h5>
+  <form id="zona-promedio">
+    <section id="inputs-generales">
+        <div class="input-aclaracion">
+            <div class="label-input">
+                <label for="cantidad-periodo">Cantidad de Periodos:</label>
+                <input type="number" id="cantidad-periodo" name="cantidad-periodo" placeholder="3" min="1" max="20" step="1" required>
+            </div>
+            <p class="aclaracion">* La cantidad de periodos se refiere a cuantos semestres/trimestres/años  piensas 
+            representar mientras calculas el promedio, en caso de no aplicar solo coloca 1.</p>
+        </div>       
+    </section>
+    <section id="zona-periodos">
+        <div class="periodo" id="periodo-1">
+            <div class="titulo-periodo">
+                <h6>Periodo #1</h6>
+            </div>
+            <section class="zona-materias">
+                <div class="inputs-materias">
+
+                    <div class="materia" id="materia-1-1">
+                        <div class="titulo-materia">
+                                <h6>Materia #1-1</h6>
+                                <i class="fa eliminar" id="eliminar-1-2">&#xf1f8;</i>
+                        </div>
+                        <div class="inputs-materia">
+                            <div class="label-input">
+                                <label for="nota-1-1">Nota Conseguida:</label>
+                                <input type="number" id="nota-1-1" name="nota-1-1" class="nota-conseguida" placeholder="15" min="0" max="100" step="any" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="materia" id="materia-1-2">
+                        <div class="titulo-materia">
+                                <h6>Materia #1-2</h6>
+                                <i class="fa eliminar" id="eliminar-1-2">&#xf1f8;</i>
+                        </div>
+                        <div class="inputs-materia">
+                            <div class="label-input">
+                                <label for="nota-1-2">Nota Conseguida:</label>
+                                <input type="number" id="nota-1-2" name="nota-1-2" class="nota-conseguida" placeholder="15" min="0" max="100" step="any" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="materia" id="materia-1-3">
+                        <div class="titulo-materia">
+                                <h6>Materia #1-3</h6>
+                                <i class="fa eliminar" id="eliminar-1-3">&#xf1f8;</i>
+                        </div>
+                        <div class="inputs-materia">
+                            <div class="label-input">
+                                <label for="nota-1-3">Nota Conseguida:</label>
+                                <input type="number" id="nota-1-3" name="nota-1-3" class="nota-conseguida" placeholder="15" min="0" max="100" step="any" required>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="boton-agregar">
+                    <i class="fa agregar" id="agregar-1">&#xf055;</i>
+                </div>
+                
+            </section>
+        </div>
+
+        <div class="periodo" id="periodo-2">
+            <div class="titulo-periodo">
+                <h6>Periodo #2</h6>
+            </div>
+            <section class="zona-materias">
+                <div class="inputs-materias">
+
+                    <div class="materia" id="materia-2-1">
+                        <div class="titulo-materia">
+                                <h6>Materia #2-1</h6>
+                                <i class="fa eliminar" id="eliminar-2-2">&#xf1f8;</i>
+                        </div>
+                        <div class="inputs-materia">
+                            <div class="label-input">
+                                <label for="nota-2-1">Nota Conseguida:</label>
+                                <input type="number" id="nota-2-1" name="nota-2-1" class="nota-conseguida" placeholder="15" min="0" max="100" step="any" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="materia" id="materia-2-2">
+                        <div class="titulo-materia">
+                                <h6>Materia #2-2</h6>
+                                <i class="fa eliminar" id="eliminar-2-2">&#xf1f8;</i>
+                        </div>
+                        <div class="inputs-materia">
+                            <div class="label-input">
+                                <label for="nota-2-2">Nota Conseguida:</label>
+                                <input type="number" id="nota-2-2" name="nota-2-2" class="nota-conseguida" placeholder="15" min="0" max="100" step="any" required>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="boton-agregar">
+                    <i class="fa agregar" id="agregar-2">&#xf055;</i>
+                </div>
+                
+            </section>
+        </div>
+
+        <div class="periodo" id="periodo-3">
+            <div class="titulo-periodo">
+                <h6>Periodo #3</h6>
+            </div>
+            <section class="zona-materias">
+                <div class="inputs-materias">
+
+                    <div class="materia" id="materia-3-1">
+                        <div class="titulo-materia">
+                                <h6>Materia #3-1</h6>
+                                <i class="fa eliminar" id="eliminar-3-2">&#xf1f8;</i>
+                        </div>
+                        <div class="inputs-materia">
+                            <div class="label-input">
+                                <label for="nota-3-1">Nota Conseguida:</label>
+                                <input type="number" id="nota-3-1" name="nota-3-1" class="nota-conseguida" placeholder="15" min="0" max="100" step="any" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="materia" id="materia-3-2">
+                        <div class="titulo-materia">
+                                <h6>Materia #3-2</h6>
+                                <i class="fa eliminar" id="eliminar-3-2">&#xf1f8;</i>
+                        </div>
+                        <div class="inputs-materia">
+                            <div class="label-input">
+                                <label for="nota-3-2">Nota Conseguida:</label>
+                                <input type="number" id="nota-3-2" name="nota-3-2" class="nota-conseguida" placeholder="15" min="0" max="100" step="any" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="materia" id="materia-3-3">
+                        <div class="titulo-materia">
+                                <h6>Materia #3-3</h6>
+                                <i class="fa eliminar" id="eliminar-3-3">&#xf1f8;</i>
+                        </div>
+                        <div class="inputs-materia">
+                            <div class="label-input">
+                                <label for="nota-3-3">Nota Conseguida:</label>
+                                <input type="number" id="nota-3-3" name="nota-3-3" class="nota-conseguida" placeholder="15" min="0" max="100" step="any" required>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="boton-agregar">
+                    <i class="fa agregar" id="agregar-3">&#xf055;</i>
+                </div>
+                
+            </section>
+        </div>
+
+    </section>
+    <div id="zona-boton">
+        <input type="button" value="Calcular" id="calcular-promedio">
+    </div>
+    
+    <div id="resultado-promedio">
+        <h3 id="nota-final">Tu promedio es <b>15.38</b> que redondeado sería <b>15</b></h3>
+    </div>
+    <div id="varios-resultados">
+        <h2 id="titulo-resultado">
+            Promedios por Periodo
+        </h2>
+        <section id="resultados-periodos">
+            
+            <div class="resultado-periodo">
+                <h6 class="nombre-resultado">Periodo #1</h3>
+                <div class="promedio-periodo">16</div>
+            </div>
+            <div class="resultado-periodo">
+                <h6 class="nombre-resultado">Periodo #2</h3>
+                <div class="promedio-periodo">13</div>
+            </div>
+            <div class="resultado-periodo">
+                <h6 class="nombre-resultado">Periodo #3</h3>
+                <div class="promedio-periodo">16.33</div>
+            </div>
+            <div class="resultado-periodo">
+                <h6 class="nombre-resultado">Final</h3>
+                <div class="promedio-periodo">15.38</div>
+            </div>
+        </section>
+    </div>
+  </form>
+
+</section>

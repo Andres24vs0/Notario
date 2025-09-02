@@ -1,0 +1,135 @@
+#zona-promedio{
+    border: 10px solid var(--secondary-color);
+    border-radius: 10px;
+    padding: 1%;
+}
+
+.aclaracion{
+    width: 75%;
+}
+
+#zona-boton{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 3% 0px 3% 0px ;
+}
+
+#nota-final{
+    font-weight: normal;
+}
+
+#resultado-promedio{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 2%;
+    text-align: center;
+}
+h3{
+    margin: 0px;
+    font-size: 2.78vw;
+}
+
+.periodo{
+    padding-top: 1%;
+    padding-bottom: 2%;
+    border-bottom: 0.25vw solid var(--primary-color);
+}
+.titulo-periodo > h6{
+    font-weight: bold;
+    margin-bottom: 1%;
+}
+
+.zona-materias{
+    display: flex;
+    flex-direction: column;
+    border: 5px solid var(--secondary-color);
+    border-radius: 5px;
+    padding: 0px 0.5% 0px 0.5%;
+}
+
+.materia{
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    border-bottom: 0.25vw solid var(--primary-color);
+}
+
+.titulo-materia{
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+}
+
+.inputs-materia{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 10vw;
+    padding: 1% 0px 1% 0px;
+}
+
+.boton-agregar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 2% 0px 2% 0px;
+}
+
+#varios-resultados{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+    justify-self: center;
+    text-align: center;
+    border: 5px solid var(--secondary-color);
+    padding: 1% 0px 1% 0px;
+}
+
+#resultados-periodos{
+    width: 98%;
+    padding: 0px 1% 0px 1%;
+}
+
+.resultado-periodo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: 0.25vw solid var(--primary-color);
+    padding: 3% 0px 3% 0px;
+}
+
+.nombre-resultado{
+    color: var(--hover-text-color);
+}
+
+#titulo-resultado{
+    margin: 1% 0px 2% 0px;
+}
+
+@media (max-width:600px){
+    #zona-promedio{
+        border: 5px solid var(--secondary-color);
+        padding: 2%;
+    }
+
+    h3{
+        font-size: 7vw;
+    }
+
+    .aclaracion{
+        width: 60%;
+    }
+}
