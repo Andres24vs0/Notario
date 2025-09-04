@@ -13,6 +13,11 @@ let inputCantPeriodos;
 //Manejo de la cantidad de Materias
 let cantidadMaterias = [];
 
+//Manejo de resultados
+let zonaResultado;
+let zonaResultadosPeriodos;
+let botonCalcular;
+
 function inicializarPromedio() {
     zonaPeriodos = document.getElementById("zona-periodos");
 
@@ -33,6 +38,22 @@ function inicializarPromedio() {
 
     //Inicializar cantidad de materias
     cantidadMaterias = [];
+
+    //Inicializar zonas de resultados
+    zonaResultado = document.getElementById("resultado-promedio");
+    zonaResultadosPeriodos = document.getElementById("varios-resultados");
+    desactivarVariosResultados();
+
+    botonCalcular = document.getElementById("calcular-promedio");
+    botonCalcular.addEventListener("click", () => {
+        if (formularioPromedioValido() && cantPeriodos > 0) {
+            logicaCalcularPromedio();
+            zonaResultado.scrollIntoView({ behavior: "smooth" });
+        } else {
+            desactivarVariosResultados();
+            zonaResultado.innerHTML = "";
+        }
+    });
 }
 
 window.inicializarPromedio = inicializarPromedio;
@@ -122,7 +143,7 @@ function logicaEliminarMateria(event) {
     }
 }
 
-export function logicaEliminarConcretoMateria(numeroPeriodo, materia, index) {
+function logicaEliminarConcretoMateria(numeroPeriodo, materia, index) {
     materia.id = `materia-${numeroPeriodo}-${index + 1}`;
     const titulo = materia.querySelector(".titulo-materia h6");
     titulo.innerHTML = `Materia #${numeroPeriodo}-${index + 1}`;
@@ -133,6 +154,61 @@ export function logicaEliminarConcretoMateria(numeroPeriodo, materia, index) {
     nota.setAttribute("name", `nota-${numeroPeriodo}-${index + 1}`);
     const labelsNota = materia.querySelectorAll(".label-input label");
     labelsNota[0].setAttribute("for", `nota-${numeroPeriodo}-${index + 1}`);
+}
+
+function logicaCalcularPromedio() {
+    const promedioFinal = calcularPromedioFinal();
+    const promedioFinalRedondeado = Math.round(promedioFinal);
+    zonaResultado.innerHTML = crearEstructuraPromedioFinal(
+        promedioFinal,
+        promedioFinalRedondeado
+    );
+    if (cantPeriodos > 1) {
+        const promediosPeriodos = [];
+        for (let i = 1; i <= cantPeriodos; i++) {
+            promediosPeriodos.push(calcularPromedioPeriodo(i));
+        }
+        activarVariosResultados();
+        zonaResultadosPeriodos.innerHTML = crearEstructuraPromediosPeriodo(
+            promediosPeriodos,
+            promedioFinal
+        );
+    }
+}
+
+function calcularPromedioFinal() {
+    const notas = document.querySelectorAll(".nota-conseguida");
+    let sumaNotas = 0;
+    notas.forEach((nota) => {
+        sumaNotas += parseFloat(nota.value);
+    });
+    let promedio = parseFloat((sumaNotas / notas.length).toFixed(2));
+    return promedio;
+}
+
+function calcularPromedioPeriodo(numeroPeriodo) {
+    let sumaNotas = 0;
+    for (let i = 1; i <= cantidadMaterias[numeroPeriodo - 1]; i++) {
+        const input = document.getElementById(`nota-${numeroPeriodo}-${i}`);
+        sumaNotas += parseFloat(input.value);
+    }
+    let promedio = parseFloat(
+        (sumaNotas / cantidadMaterias[numeroPeriodo - 1]).toFixed(2)
+    );
+    console.log(promedio);
+    return promedio;
+}
+
+function formularioPromedioValido() {
+    const inputs = document.querySelectorAll("input");
+    let esValido = true;
+    inputs.forEach((input) => {
+        let temp = logicaErroresGenerico(input);
+        if (!temp) {
+            esValido = false;
+        }
+    });
+    return esValido;
 }
 
 function crearEstructuraPeriodo(numeroPeriodo) {
@@ -168,4 +244,47 @@ function crearEstructuraMateria(numeroPeriodo, numeroMateria) {
         </div>
     </div>`;
     return nuevaMateria;
+}
+
+function crearEstructuraPromedioFinal(promedio, promedioRedondeado) {
+    let texto = `<h3 id="nota-final">Tu promedio es <b>${promedio}</b>`;
+    if (promedio != promedioRedondeado) {
+        texto += ` que redondeado sería <b>${promedioRedondeado}</b>`;
+    }
+    texto += `</h3>`;
+    return texto;
+}
+
+function crearEstructuraPromediosPeriodo(promedios, promedioFinal) {
+    let texto = `
+        <h2 id="titulo-resultado">
+            Promedios por Periodo
+        </h2>
+        <section id="resultados-periodos">`;
+    for (let i = 0; i < promedios.length; i++) {
+        texto += `
+            <div class="resultado-periodo">
+                <h6 class="nombre-resultado">Periodo #${i + 1}</h3>
+                <div class="promedio-periodo">${promedios[i]}</div>
+            </div>`;
+    }
+    texto += `
+        <div class="resultado-periodo">
+                <h6 class="nombre-resultado">Final</h3>
+                <div class="promedio-periodo">${promedioFinal}</div>
+            </div>
+        </section>`;
+    return texto;
+}
+
+function desactivarVariosResultados() {
+    if (!zonaResultadosPeriodos.classList.contains("inactivo")) {
+        zonaResultadosPeriodos.classList.add("inactivo");
+    }
+}
+
+function activarVariosResultados() {
+    if (zonaResultadosPeriodos.classList.contains("inactivo")) {
+        zonaResultadosPeriodos.classList.remove("inactivo");
+    }
 }

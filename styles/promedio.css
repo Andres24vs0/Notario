@@ -120,6 +120,10 @@ h3{
     margin: 1% 0px 2% 0px;
 }
 
+#varios-resultados.inactivo{
+    display: none;
+}
+
 @media (max-width:600px){
     #zona-promedio{
         border: 5px solid var(--secondary-color);
