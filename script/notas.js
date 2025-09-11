@@ -6,7 +6,8 @@ import {
     logicaErroresPorcentajes,
     logicaErroresGenerico,
     formularioValido,
-    logicaEliminarConcreto
+    logicaEliminarConcreto,
+    avanzarInput,
 } from "./index.js";
 
 let zonaNotas;
@@ -45,11 +46,19 @@ function inicializarNotas() {
         }
     });
 
+    inputNotaMaxima.addEventListener("keydown", (event) => {
+        avanzarInput(event, logicaBotonCalcular);
+    });
+
     inputNotaMinima.addEventListener("input", (event) => {
         if (logicaErroresNotas(event.target, notaMaximaVacia, notaMaxima)) {
             notaMinima = event.target.value;
             console.log("Nota Minima: " + notaMinima);
         }
+    });
+
+    inputNotaMinima.addEventListener("keydown", (event) => {
+        avanzarInput(event, logicaBotonCalcular);
     });
 
     //Inicializar agregar y eliminar
@@ -71,13 +80,7 @@ function inicializarNotas() {
     resultado = document.getElementById("resultado-nota");
 
     botonCalcular.addEventListener("click", () => {
-        resultado.innerHTML = "";
-        const esValido = formularioValido(inputNotaMaxima, inputNotaMinima, notaMaximaVacia, notaMaxima);
-        console.log(esValido);
-        if (esValido) {
-            calcularNotaFinal();
-            resultado.scrollIntoView({ behavior: "smooth" });
-        }
+        logicaBotonCalcular();
     });
 }
 window.inicializarNotas = inicializarNotas;
@@ -123,9 +126,17 @@ function agregarEvaluacion() {
         logicaErroresPorcentajes(event.target);
     });
 
+    porcentaje.addEventListener("keydown", (event) => {
+        avanzarInput(event, logicaBotonCalcular);
+    });
+
     const nota = document.getElementById(`nota-${cantEvaluacion}`);
     nota.addEventListener("input", (event) => {
         logicaErroresNotas(event.target, notaMaximaVacia, notaMaxima);
+    });
+
+    nota.addEventListener("keydown", (event) => {
+        avanzarInput(event, logicaBotonCalcular);
     });
 }
 
@@ -138,7 +149,7 @@ function logicaEliminar(event) {
         cantEvaluacion--;
         const evaluacionesRestantes = document.querySelectorAll(".evaluacion");
         evaluacionesRestantes.forEach((evaluacion, index) => {
-            logicaEliminarConcreto(evaluacion, index) 
+            logicaEliminarConcreto(evaluacion, index);
         });
     }
 }
@@ -156,6 +167,21 @@ function logicaAgregar() {
         );
     } else {
         agregarEvaluacion();
+    }
+}
+
+function logicaBotonCalcular() {
+    resultado.innerHTML = "";
+    const esValido = formularioValido(
+        inputNotaMaxima,
+        inputNotaMinima,
+        notaMaximaVacia,
+        notaMaxima
+    );
+    console.log(esValido);
+    if (esValido) {
+        calcularNotaFinal();
+        resultado.scrollIntoView({ behavior: "smooth" });
     }
 }
 

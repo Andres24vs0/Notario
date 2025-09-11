@@ -177,6 +177,19 @@ export function formularioValido(
     return esValido;
 }
 
+export function avanzarInput(event, funcionFinal) {
+    if (event.key === "Enter") {
+        const inputActual = event.target;
+        const inputs = Array.from(document.querySelectorAll("input"));
+        const index = inputs.indexOf(inputActual);
+        if (index !== inputs.length - 1) {
+            inputs[index + 1].focus();
+        } else if (index === inputs.length - 1) {
+            funcionFinal();
+        }
+    }
+}
+
 function cargarHTML(id, archivo) {
     return fetch("pages/" + archivo + ".html")
         .then((response) => {

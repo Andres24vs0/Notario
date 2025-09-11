@@ -1,4 +1,8 @@
-import { obtenerSimbolos, logicaErroresGenerico } from "./index.js";
+import {
+    obtenerSimbolos,
+    logicaErroresGenerico,
+    avanzarInput,
+} from "./index.js";
 
 let zonaPeriodos;
 
@@ -36,6 +40,10 @@ function inicializarPromedio() {
         }
     });
 
+    inputCantPeriodos.addEventListener("keydown", (event) => {
+        avanzarInput(event, logicaBotonCalcular);
+    });
+
     //Inicializar cantidad de materias
     cantidadMaterias = [];
 
@@ -46,13 +54,7 @@ function inicializarPromedio() {
 
     botonCalcular = document.getElementById("calcular-promedio");
     botonCalcular.addEventListener("click", () => {
-        if (formularioPromedioValido() && cantPeriodos > 0) {
-            logicaCalcularPromedio();
-            zonaResultado.scrollIntoView({ behavior: "smooth" });
-        } else {
-            desactivarVariosResultados();
-            zonaResultado.innerHTML = "";
-        }
+        logicaBotonCalcular();
     });
 }
 
@@ -107,6 +109,10 @@ function logicaAgregarMateria(numeroPeriodo) {
     );
     input.addEventListener("input", (event) => {
         logicaErroresGenerico(event.target);
+    });
+
+    input.addEventListener("keydown", (event) => {
+        avanzarInput(event, logicaBotonCalcular);
     });
 
     const eliminar = document.getElementById(
@@ -173,6 +179,16 @@ function logicaCalcularPromedio() {
             promediosPeriodos,
             promedioFinal
         );
+    }
+}
+
+function logicaBotonCalcular() {
+    if (formularioPromedioValido() && cantPeriodos > 0) {
+        logicaCalcularPromedio();
+        zonaResultado.scrollIntoView({ behavior: "smooth" });
+    } else {
+        desactivarVariosResultados();
+        zonaResultado.innerHTML = "";
     }
 }
 

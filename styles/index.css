@@ -91,6 +91,12 @@ input[type="button"]:hover{
     color: var(--hover-text-button-color);
 }
 
+input[type="button"]:focus{
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
 .label-input{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -281,6 +287,7 @@ b{
         font-size: 3.5vw;
     }
 
+    
     .aclaracion{
         width: 54%;
     }

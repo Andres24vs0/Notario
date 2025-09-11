@@ -7,6 +7,7 @@ import {
     logicaErroresGenerico,
     formularioValido,
     logicaEliminarConcreto,
+    avanzarInput,
 } from "./index.js";
 
 //Nota Maxima
@@ -61,11 +62,19 @@ function inicializarPrediccion() {
         }
     });
 
+    inputNotaMaxima.addEventListener("keydown", (event) => {
+        avanzarInput(event, logicaBotonCalcular);
+    });
+
     inputNotaMinima.addEventListener("input", (event) => {
         if (logicaErroresNotas(event.target, notaMaximaVacia, notaMaxima)) {
             notaMinima = event.target.value;
             console.log("Nota Minima: " + notaMinima);
         }
+    });
+
+    inputNotaMinima.addEventListener("keydown", (event) => {
+        avanzarInput(event, logicaBotonCalcular);
     });
 
     //Inicializacion evaluaciones realizadas
@@ -100,26 +109,7 @@ function inicializarPrediccion() {
     parteInferior = document.getElementById("parte-inferior");
 
     botonCalcular.addEventListener("click", () => {
-        reiniciarResultados();
-        if (
-            formularioValido(
-                inputNotaMaxima,
-                inputNotaMinima,
-                notaMaximaVacia,
-                notaMaxima
-            )
-        ) {
-            if (seleccionActual == 1) {
-                logicaCalcularUnaNotaFutura();
-            } else if (seleccionActual == 2) {
-                logicaCalcularDosNotasFuturas();
-            } else {
-                alert(
-                    "Por favor, seleccione una cantidad válida de evaluaciones futuras."
-                );
-            }
-            parteInferior.scrollIntoView({ behavior: "smooth" });
-        }
+        logicaBotonCalcular();
     });
 
     reiniciarResultados();
@@ -145,9 +135,17 @@ function agregarEvaluacion() {
         logicaErroresPorcentajes(event.target);
     });
 
+    porcentaje.addEventListener("keydown", (event) => {
+        avanzarInput(event, logicaBotonCalcular);
+    });
+
     const nota = document.getElementById(`nota-${cantEvaluacionesRealizadas}`);
     nota.addEventListener("input", (event) => {
         logicaErroresNotas(event.target, notaMaximaVacia, notaMaxima);
+    });
+
+    nota.addEventListener("keydown", (event) => {
+        avanzarInput(event, logicaBotonCalcular);
     });
 }
 
@@ -158,6 +156,10 @@ function agregarEvaluacionFutura(numero) {
     const porcentaje = document.getElementById(`porcentaje-futuro-${numero}`);
     porcentaje.addEventListener("input", (event) => {
         logicaErroresPorcentajes(event.target);
+    });
+
+    porcentaje.addEventListener("keydown", (event) => {
+        avanzarInput(event, logicaBotonCalcular);
     });
 }
 
@@ -367,8 +369,8 @@ function logicaCalcularDosNotasFuturas() {
             desaprobar();
         } else {
             let primerResultadoOpcionTitulo = 1;
-            if(resultados.length === 1){
-                primerResultadoOpcionTitulo=2;
+            if (resultados.length === 1) {
+                primerResultadoOpcionTitulo = 2;
             }
             habilitarVariosResultados();
             variosResultados.innerHTML += crearEstructuraDosResultados(
@@ -393,6 +395,29 @@ function logicaCalcularDosNotasFuturas() {
                 );
             }
         }
+    }
+}
+
+function logicaBotonCalcular() {
+    reiniciarResultados();
+    if (
+        formularioValido(
+            inputNotaMaxima,
+            inputNotaMinima,
+            notaMaximaVacia,
+            notaMaxima
+        )
+    ) {
+        if (seleccionActual == 1) {
+            logicaCalcularUnaNotaFutura();
+        } else if (seleccionActual == 2) {
+            logicaCalcularDosNotasFuturas();
+        } else {
+            alert(
+                "Por favor, seleccione una cantidad válida de evaluaciones futuras."
+            );
+        }
+        parteInferior.scrollIntoView({ behavior: "smooth" });
     }
 }
 
