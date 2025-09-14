@@ -261,6 +261,10 @@ function logicaCalcularUnaNotaFutura() {
             let notaFinal = notaActual + equivalencia;
             if (notaFinal < notaMinima) {
                 notaFutura++;
+                if(notaFutura > notaMaxima){
+                    desaprobar();
+                    return;
+                }
                 equivalencia = parseFloat((notaFutura * porcentaje).toFixed(2));
                 notaFinal = notaActual + equivalencia;
             }
