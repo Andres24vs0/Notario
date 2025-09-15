@@ -1,1 +1,101 @@
-informacion
+<section id="informacion">
+    <h2>Información</h2>
+    <h5>Obtén toda la información acerca de Notario, desde quien la creó hasta como funciona</h5>
+    <section id="zona-informacion">
+        <div class="info" id="info-0">
+            <div class="titulo" id="titulo-0">
+                <h2>¿Qué es Notario?</h2>
+                <i class="fa desplegar" id="desplegar-0"></i>
+            </div>
+            <div class="detalle inactivo" id="detalle-0">
+                <p>Notario es una aplicación web diseñada para simplificar los cálculos académicos. Su principal objetivo es ayudar a los estudiantes a gestionar sus notas de manera fácil y rápida, ofreciendo tres funciones clave:</p>
+                <ul>
+                    <li>Calcular la nota definitiva de una materia.</li>
+                    <li>Predecir la nota mínima que necesitas para aprobar.</li>
+                    <li>Calcular el promedio de tus notas definitivas.</li>
+                </ul>
+                <p>Notario nació de la necesidad de simplificar un proceso que puede ser confuso o complicado para muchos. Olvídate de las calculadoras, de las reglas de tres o de pedir ayuda a tus amigos. Con Notario, los cálculos son fáciles y directos, permitiéndote concentrarte en lo que realmente importa: tus estudios.</p>
+            </div>
+        </div>
+
+        <div class="info" id="info-1">
+            <div class="titulo" id="titulo-1">
+                <h2>¿Quién es el creador de Notario?</h2>
+                <i class="fa desplegar" id="desplegar-1"></i>
+            </div>
+            <div class="detalle inactivo" id="detalle-1">
+                <div id="parte-superior">
+                    <img src="images/Autor.jpg" alt="Autor de Notario" id="foto-autor">
+                    <p>Notario fue creado por mí, Andrés Valdivieso, un joven estudiante de Ingeniería Informática en la Universidad Católica Andrés Bello (UCAB) en Caracas, Venezuela.
+                    <br>
+                    <br>
+                    Desarrollé Notario como un proyecto personal durante las vacaciones entre julio y septiembre de 2025, justo antes de comenzar mi sexto semestre de la carrera.
+                    <br>
+                    <br>
+                    La inspiración para esta aplicación viene de que tengo muchos amigos que estudian Comunicación Social y prefieren mantenerse alejados de los números. Constantemente me pedían ayuda para calcular sus promedios y notas. Al ver esta necesidad común, decidí crear una herramienta que les permitiera hacer estos cálculos de manera sencilla, sin tener que recurrir a ningun tercero.</p>
+                </div>
+                <p id="parte-inferior">En el footer de la página pueden encontrar botones que lo llevan a mi Github y redes sociales, por si quieren ver el código detrás de Notario, otros proyectos en los que he participado o comunicarse conmigo.</p>
+            </div>
+        </div>
+
+        <div class="info" id="info-2">
+            <div class="titulo" id="titulo-2">
+                <h2>Nota Definitiva</h2>
+                <i class="fa desplegar" id="desplegar-2"></i>
+            </div>
+            <div class="detalle inactivo" id="detalle-2">
+                <p>Como su nombre lo indica, este apartado te permite calcular la nota final de una materia y te informa si la aprobaste o no.
+                    <br>
+                    <br>
+                    La herramienta funciona de manera simple y precisa. Solo tienes que ingresar la nota que obtuviste en cada evaluación y su porcentaje correspondiente. La aplicación multiplica cada nota por su porcentaje y lo divide entre 100 y suma los resultados para darte la calificación final.
+                    <br>
+                    <br>
+                    Una vez que tienes el resultado, la aplicación lo redondea y lo compara con la nota mínima de aprobación. Además, Notario es capaz de detectar y avisarte si la nota sin redondear te hace reprobar, pero la nota redondeada te permite aprobar. Así, tienes la información completa para cualquier caso.</p>
+            </div>
+        </div>
+
+        <div class="info" id="info-3">
+            <div class="titulo" id="titulo-3">
+                <h2>Predicción de Notas</h2>
+                <i class="fa desplegar" id="desplegar-3"></i>
+            </div>
+            <div class="detalle inactivo" id="detalle-3">
+                <p>Este apartado te ayuda a saber exactamente qué nota mínima debes obtener en tus evaluaciones restantes para poder aprobar la materia.</p>
+                <h5>Lógica detrás de una Evaluación Futura</h5>
+                <p>Cuando solo te falta una nota, el proceso es muy sencillo. La aplicación primero hace una suma de todos los puntos que ya tienes acumulados con tus notas actuales. Luego, compara ese total con los puntos necesarios para aprobar la materia y calcula los puntos que te faltan.
+                    <br>
+                    <br>
+                    Con esos puntos faltantes, la aplicación realiza un cálculo para convertirlos en una nota para tu próxima evaluación. El sistema se asegura de que la nota que te muestra sea válida incluso después de redondear, garantizando que el resultado te permita aprobar.
+                </p>
+                <h5>Lógica detrás de dos Evaluaciones Futuras</h5>
+                <p>Cuando aún te faltan dos notas, el cálculo es más complejo, ya que existen muchas combinaciones posibles para aprobar. La aplicación utiliza una relación matemática para resolverlo: para cada posible nota que saques en tu primera evaluación, calcula automáticamente qué nota necesitarías en la segunda para alcanzar el promedio de aprobación.
+                    <br>
+                    <br>
+                    La aplicación hace este cálculo para todas las combinaciones de notas posibles y las guarda en una lista interna. Para simplificar, Notario te muestra tres escenarios clave y estratégicos de esa lista:
+                </p>
+                <ul>
+                    <li>Menor posible nota en Evaluación Futura #1.</li>
+                    <li>Notas medias en ambas evaluaciones.</li>
+                    <li>Menor posible nota en Evaluación Futura #2.</li>
+                </ul>
+                <p>De esta forma el usuario puede evaluar el panorama, existen casos donde solo existen 1 o 2 escenarios para aprobar, asi que ten en cuenta que no siempre tienes garantizado los 3 resultados. Si quieres ver todas las combinaciones de notas puedes acceder a la opcion de inspeccionar en tu navegador y ver la consola, ahi estará la lista interna entera. 
+                </p>
+            </div>
+        </div>
+
+        <div class="info" id="info-4">
+            <div class="titulo" id="titulo-4">
+                <h2>Cálculo de Promedio</h2>
+                <i class="fa desplegar" id="desplegar-4"></i>
+            </div>
+            <div class="detalle inactivo" id="detalle-4">
+                <p>Este apartado te permite calcular tu promedio de notas, tanto general como por periodos académicos.
+                    <br>
+                    <br>
+                    Aunque calcular un promedio simple puede parecer fácil, al fin y al cabo es sumar todas las notas y dividirlas entre el total de materias, esta herramienta se vuelve indispensable cuando tienes que manejar una gran cantidad de materias o si en tu institución los estudios se dividen en periodos, tales como trimestres, semestres o años. Notario te ayuda a mantener un registro organizado, evitando que te pierdas entre tantas calificaciones.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+</section>

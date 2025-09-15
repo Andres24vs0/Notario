@@ -6,6 +6,8 @@ const codigosSimbolos = [
     { codigo: "&#xf055;", descripcion: "agregar" },
     { codigo: "&#xf1f8;", descripcion: "eliminar" },
     { codigo: "&#xf16d;", descripcion: "instagram" },
+    { codigo: "&#xf107;", descripcion: "abrir" },
+    { codigo: "&#xf106;", descripcion: "cerrar" },
 ];
 
 export function obtenerSimbolos(descripcion) {
