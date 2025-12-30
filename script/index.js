@@ -10,6 +10,8 @@ const codigosSimbolos = [
     { codigo: "&#xf106;", descripcion: "cerrar" },
 ];
 
+const lol=1;
+
 export function obtenerSimbolos(descripcion) {
     return codigosSimbolos.find((item) => item.descripcion === descripcion)
         .codigo;
